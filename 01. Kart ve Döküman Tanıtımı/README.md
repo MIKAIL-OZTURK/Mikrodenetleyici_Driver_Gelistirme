@@ -1,6 +1,6 @@
 # Tanıtım  
 ## Kart Tanıtmı 
-**STM32F4 Discovery**     
+### STM32F4 Discovery  
 ![General](https://user-images.githubusercontent.com/75627147/190567758-3c5c3074-ee06-470f-800b-cbb2a97340da.png)
 
 - 32-Bit ARM Cortex-M4 çekirdeğe sahip STM32F407VGT6 mikrodenetleyicişi, 1 MB Flash bellek ve 192 KB RAM    
