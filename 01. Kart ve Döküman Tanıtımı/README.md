@@ -19,11 +19,11 @@
 - USB OTG için mikro-AB konnektör    
 - 100 pin’in tamamını kullanabilmeye imkân tanıyan çıkışlar    
 
-## Dökümanlar Tanıtmı  
-- Reference Manual 	  - Tüm Register seviyesinde işlemlerin olduğu dökümandır. 
-- User Manual 		    - Kart hakkında genel bilgi verir.
-- Data Sheet 		      - Mikrodenetleyici için bilgiler verir. 
-- Errate Sheet		    - ST firmasınıın kart ile ilgili problemlerin çözümlerini yayınladığı dökümandır  
+## Döküman Tanıtmı 
+- Reference Manual          : Tüm Register seviyesinde işlemlerin olduğu dökümandır. 
+- User Manual 		        : Kart hakkında genel bilgi verir.
+- Data Sheet 		        : Mikrodenetleyici için bilgiler verir. 
+- Errate Sheet		        : ST firmasınıın kart ile ilgili problemlerin çözümlerini yayınladığı dökümandır.   
 
 ## Kullanılan Yazılımlar   
 - ST Link 
