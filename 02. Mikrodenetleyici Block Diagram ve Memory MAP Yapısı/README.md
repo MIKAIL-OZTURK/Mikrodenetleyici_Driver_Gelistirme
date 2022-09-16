@@ -1,6 +1,5 @@
-# Mikrodenetleyici Block Diagram 
-
-## Mikroilemci
+# Mikrodenetleyici Hakkında Genel Bilgi      
+## Mikroişlemci
 Mikroişlemci, genellikle toplama, çıkarma, sayıları karşılaştırma, sayıları bir yerden diğerine aktarma, aritmetik ve mantık işlemlerini 
 gerçekleştiren bilgisayar sistemlerinin merkezi birimidir. Basitçe, işlemci, merkezi işlem birimi veya mantık yongası olarak da bilinmektedir.
 Mikroişlemcinin beyni CPU(Central Process Unit) ‘dur. Mikroişlemcinin hafızasındaki programları bulma, çağırma ve onları çalıştırma, veri işleme 
@@ -13,11 +12,6 @@ bulunmaktadır.
 Tek çiplik bilgisayar olarak tanımlanabilir. İçerisinde bir mikroişlemci, bellek, sayısal giriş-çıkış pinleri ve diğer çevresel birimleri 
 barındırır. Popüler mikrodenetliyici türleri PIC, ARM, 8051(İntel), AVR(Atmel), MSP(Texas) 'dir. 
 
-# Block Diagramlar Neden Kullanılır ?
-1. Mikrodenetliyici tasarımı hakkında genel bir bilgi verir. (Mikroişlemci, RAM, Flash vs.)
-2. Mikrodenetleyici sahip olduğu çevresel birimler hakkında bilgi verir. (GPIO, ADC, TIM, SPI vs.)
-3. Mikroişlemci ile çevresel birimlerin bağlı olduğu veri yolları hakkında bilgi verir. (AHB1, APB1 vs. ) 
-
 ## Veri Yolları (Bus)
 Mikroişlemciyle diğer çevresel birim arasındaki veri iletişimini sağlayan yapılara veri yolu(bus) denir. 
  
@@ -27,13 +21,8 @@ Mikroişlemciyle diğer çevresel birim arasındaki veri iletişimini sağlayan 
 
 _Daha ayrıntılı bilgi için: "STM32F407VG Data Sheet.pdf -> Sayfa 19"_
 
-
-
-
-
-
-
-
-
-
+# Block Diagramlar Neden Kullanılır ?     
+1. Mikrodenetliyici tasarımı hakkında genel bir bilgi verir. (Mikroişlemci, RAM, Flash vs.)
+2. Mikrodenetleyici sahip olduğu çevresel birimler hakkında bilgi verir. (GPIO, ADC, TIM, SPI vs.)
+3. Mikroişlemci ile çevresel birimlerin bağlı olduğu veri yolları hakkında bilgi verir. (AHB1, APB1 vs. ) 
 
