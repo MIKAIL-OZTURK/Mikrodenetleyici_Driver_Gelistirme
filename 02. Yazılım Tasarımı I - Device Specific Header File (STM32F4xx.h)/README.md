@@ -9,7 +9,7 @@
 ```
 
 ## :dart: Yol Haritası      
-### 1. Temel Adres Tanımlamaları   
+### **1. Temel Adres Tanımlamaları**  
 - Temel adres değerleri arasında boşluk olamaz.
 - Temel adres değerleri _unsiged long_ olmalıdır. Bunun için temel adres değerleri **UL** ile bitmelidir. 
 #### 1. Hafıza Birimlerinin Temel Adresleri       
@@ -66,8 +66,9 @@
 #define RCC_BASE_ADDR						(AHB1_BASE_ADDR + 0x3800UL)		/* RCC Base Address		*/
 ```
 
-### 2. Çevre Birimleri Yapılarının Tanımlanması
-- Tüm çevre birimlerinin registerları `volatile` olmak zorundadır. 
+### **2. Çevre Birimleri Yapılarının Tanımlanması**    
+- Tüm çevre birimlerinin registerları `volatile` olmak zorundadır.   
+- Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
 #### 1. GPIO (General Purpose I/O)    
 ```c
 #include <stdint.h>
