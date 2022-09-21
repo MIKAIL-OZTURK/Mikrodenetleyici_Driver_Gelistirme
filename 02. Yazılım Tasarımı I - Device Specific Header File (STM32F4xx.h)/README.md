@@ -1,4 +1,4 @@
-# Device Specific Header File (STM32F4xx.h)   
+# Device Specific Header File (STM32F407xx.h)   
 ```c
 #ifndef INC_STM32F407XX_H_
 #define INC_STM32F407XX_H_
