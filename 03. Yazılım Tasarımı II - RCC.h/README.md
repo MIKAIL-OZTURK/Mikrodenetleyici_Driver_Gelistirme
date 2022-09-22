@@ -13,8 +13,8 @@ hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatl
 ## :dart: Yol Haritası  
 ### 1. AHB1 Veri Yolunu Aktif veya Pasif Eden Fonksiyonlar 
 #### 1. GPIO
-GPIO çevre birimlerini kullanabilmek için GPIO'nun bağlı olduğu veri yolu aktif edilmelidir. GPIO AHB1 veri yoluna bağlıdır. 
-AHB1 veri yolunu GPIO portları için aktif eden register: ```RCC->AHB1ENR```
+GPIO çevre birimlerini kullanabilmek için GPIO'nun bağlı olduğu veri yolu aktif edilmelidir: AHB1.     
+AHB1 veri yolunu GPIO portları için aktif eden RCC registeri: ```RCC->AHB1ENR```
 
 ```c
 /* RCC AHB1 Peripherals Clock Control Macro Definitions */
