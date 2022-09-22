@@ -11,7 +11,7 @@ hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatl
 - RCC AHB1 Peripherals Clock Control Macro Definitions 
 
 ## :dart: Yol Haritası  
-### 1. AHB1 Veri Yolunu Aktif veya Pasif Eden Fonksiyonlar 
+### 1. AHB1 Veri Yolunu Aktif veya Pasif Eden Registerler 
 #### 1. GPIO
 GPIO çevre birimlerini kullanabilmek için GPIO'nun bağlı olduğu veri yolu aktif edilmelidir: AHB1.     
 AHB1 veri yolunu GPIO portları için aktif eden RCC registeri: ```RCC->AHB1ENR```
