@@ -66,7 +66,7 @@
 #define RCC_BASE_ADDR						(AHB1_BASE_ADDR + 0x3800UL)		/* RCC Base Address		*/
 ```
 
-### **2.Çevresel Birim Yapılarının Tanımlanması**    
+### **2. Çevresel Birim Yapılarının Tanımlanması**    
 - Tüm çevre birimlerinin registerları `volatile` olmak zorundadır.   
 - Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
 #### 1. GPIO (General Purpose I/O)    
@@ -95,7 +95,7 @@ typedef struct
 #define GPIOD								((GPIO_TypeDef_t *)(GPIOD_BASE_ADDR))
 #define GPIOE								((GPIO_TypeDef_t *)(GPIOE_BASE_ADDR))
 ```
-#### RCC (Reset and Clock Control)
+#### 2. RCC (Reset and Clock Control)
 Clock hatlarını aktif eden birimdir. 
 ```c
 typedef struct
