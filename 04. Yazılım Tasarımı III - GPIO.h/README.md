@@ -11,7 +11,7 @@ GPIO port output type register - Bir pinin çıkış türünü yapılandırmak i
 Çıkış Türleri: Output push-pull - Output open-drain           
 
 **3. GPIOx_OSPPEDR**               
-GPIO port output speed register - Bir pinin çıkış hıznı yapılandırmak için kullanılır. 
+GPIO port output speed register - Lojik 1'den lojik 0'a çıkma veya lojik 0'dan lojik 1'e geçme hızını(~süresini) ayarlar. 
 Çıkış Hızları: Low - Medium - High -  Very high speeds
 
 **4. GPIOx_PUPDR**              
