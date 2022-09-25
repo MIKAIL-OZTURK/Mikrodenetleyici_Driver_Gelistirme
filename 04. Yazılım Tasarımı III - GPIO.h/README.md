@@ -43,6 +43,8 @@ GPIO alternate function high register - Modu alternatif fonksiyon(alternate func
 
 
 ## GPIO Yapıları 
+1. GPIO Registerlerini içeren yapıdır. **GPIO_TypeDef_t** nesnesi ile bu yapıya erişilir.  
+2. 
 
 ## GPIO Fonksiyonları 
 
