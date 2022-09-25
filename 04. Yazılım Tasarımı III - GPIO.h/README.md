@@ -1,4 +1,8 @@
-# GPIO ? 
+# GPIO nedir ? 
 
-## GPIO_TypeDef_t nedir
-## GPIO_InitTypeDef_t nedir 
+## GPIO Registers 
+
+## GPIO Yapıları 
+
+## GPIO Fonksiyonları 
+
