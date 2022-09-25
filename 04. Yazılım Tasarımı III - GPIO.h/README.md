@@ -32,8 +32,14 @@ Kullanımı: 0 - 15 Bitler için 1 -> Set, 0 -> İşlem Yok | 16 - 31 Bitler iç
 
 **8. GPIOx_LCKR**                         
 GPIO port configuration lock register - Bir pini konfigüre ettikten sonra ayarlarının değiştirmemesini istediğiniz durumlarda pine kilitleme işlemi uygular. 
-Kilitlenmiş bir pinin ayarları resetlenmediği sürece değiştirilemez.  
-
+Kilitlenmiş bir pinin ayarları mikrodenetleyicinin ya da çevresel birimin resetlenmediği sürece konfigüre edilemez. Kullanımı:               
+```
+Pinler: 0 - 15 -> Konfigüre Edilecek Pinler, 16 -> Anahtarın Bulunduğu Pin , 17 - 31 -> Rezerve Edilmiş Pinler
+Adım 1: 16. bite 1 yaz ve konfigüre edeceğin pine veri yaz. ( LCKR[16] = '1'  LCKR[15:0] = DATA )
+Adım 2: 16. bite 0 yaz ve konfigüre edeceğin pine veri yaz  ( LCKR[16] = '0'  LCKR[15:0] = DATA )            
+Adım 3: 16. bite 1 yaz ve konfigüre edeceğin pine veri yaz  ( LCKR[16] = '1'  LCKR[15:0] = DATA )              
+Adım 4: Okuma işlemi yap.                                   ( tempValue = GPIOx->LCKR           )
+```
 
 **9. GPIOx_AFRL**           
 GPIO alternate function low register - Modu alternatif fonksiyon(alternate function) olarak seçilmiş bir pini yapılandormak çin kullanılır. 
