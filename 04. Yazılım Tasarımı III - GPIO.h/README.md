@@ -1,9 +1,4 @@
-# GPIO.h  
-## :dart: Yol Haritası
-### 1. Registerlerin Aldığı Değerlerin Tanımlanması 
-
-
-## GPIO Registers 
+# GPIO Registers 
 
 **1. GPIOx_MODER**
 GPIO port mode register - Bir pinin modunu belirlemek için kullanılır.         
@@ -58,7 +53,3 @@ GPIO alternate function high register - Modu alternatif fonksiyon(alternate func
 ## GPIO API'leri
 **1. void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState) ** 
 **2. 
-
-
-
-
