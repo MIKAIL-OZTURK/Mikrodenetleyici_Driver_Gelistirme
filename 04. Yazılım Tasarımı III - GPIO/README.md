@@ -1,9 +1,11 @@
 # GPIO (General Purpose Input Output)
 
 ### GPIO.h
--
+1. Registerlerin Aldığı Değerlerin Tanımlanması
+2. Yapılar
+3. Fonksiyon Prototipleri ( API's )       
 ### GPIO.c
--
+1. Fonksiyon Tanımlamaları ( API's )
 
 ---
 ## GPIO Registers 
