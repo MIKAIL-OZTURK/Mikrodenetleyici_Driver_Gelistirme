@@ -1,5 +1,12 @@
-# GPIO Registers 
+# GPIO (General Purpose Input Output)
 
+### GPIO.h
+-
+### GPIO.c
+-
+
+---
+## GPIO Registers 
 **1. GPIOx_MODER**
 GPIO port mode register - Bir pinin modunu belirlemek için kullanılır.         
 Modlar: Giriş modu(Input) - Genel amaçlı çıkış modu(General purpose output mode) - Anternatif Fonksiyon modu(Anternate function mode) - Analog mod(Analog mode)    
@@ -44,12 +51,3 @@ GPIO alternate function low register - Modu alternatif fonksiyon(alternate funct
 
 **10. GPIOx_AFRH**                         
 GPIO alternate function high register - Modu alternatif fonksiyon(alternate function) olarak seçilmiş bir pini yapılandormak çin kullanılır. 
-
-
-## GPIO Sınıfları 
-1. GPIO Registerlerini içeren yapıdır. **GPIO_TypeDef_t** nesnesi ile bu yapıya erişilir.  
-2. 
-
-## GPIO API'leri
-**1. void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState) ** 
-**2. 
