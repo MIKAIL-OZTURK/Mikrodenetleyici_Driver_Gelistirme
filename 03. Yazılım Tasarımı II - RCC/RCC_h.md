@@ -1,15 +1,3 @@
-# RCC.h
-Varsayılan olarak tüm çevresel birimlerin veri yolları(data bus ~ clock hattı) güç tasarrufu için pasif konumdadır. Kullanılamak istenen çevresel birim için clock 
-hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatlarını aktif veya pasif eden yapılara RCC(reset and clock control) denir.   
-
-### STM32F407xx.h Dosyasında Olanlar
-- RCC Register Yapısı ( typedef struct { ... }RCC_TypeDef_t; )
-- RCC Nesnesi ( #define RCC									((RCC_TypeDef_t  *)(RCC_BASE_ADDR  )) )
-- AHB1 veri yolu üzerindeki GPIO portlarını kullanabilmek için bit tanımlamaları (Bit Definition)  
-
-### RCC.h Dosyasında Olanlar 
-- RCC AHB1 Peripherals Clock Control Macro Definitions 
-
 ## :dart: Yol Haritası  
 ### 1. AHB1 Veri Yolunu Aktif veya Pasif Eden Registerler 
 #### 1. GPIO
