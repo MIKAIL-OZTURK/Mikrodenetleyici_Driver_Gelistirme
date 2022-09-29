@@ -3,7 +3,8 @@ Varsayılan olarak tüm çevresel birimlerin veri yolları(data bus ~ clock hatt
 hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatlarını aktif veya pasif eden yapılara RCC(reset and clock control) denir.   
 
 ## RCC.h 
-- Çevresel birimlerin clock hattını aktif etmek için kullanılan makro fonksiyonları
+1. Çevresel birimlerin clock hattını aktif veya devre dışı bırakmak için kullanılan makro fonksiyonlar
 
 ## RCC.c 
 
+## RCC Registers 
