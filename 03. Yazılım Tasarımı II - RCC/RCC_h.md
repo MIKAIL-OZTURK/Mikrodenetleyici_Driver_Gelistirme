@@ -1,8 +1,5 @@
 ## :dart: Yol Haritası  
-### 1. AHB1 Veri Yolunu Aktif veya Pasif Eden Registerler 
-#### 1. GPIO
-GPIO çevre birimlerini kullanabilmek için GPIO'nun bağlı olduğu veri yolu aktif edilmelidir: AHB1.     
-AHB1 veri yolunu GPIO portları için aktif eden RCC registeri: ```RCC->AHB1ENR```
+### Çevresel birimlerin clock hattını aktif etmek veya devre dışı bırakmak için kullanılan makro fonksiyonlar
 
 ```c
 /* RCC AHB1 Peripherals Clock Control Macro Definitions */
@@ -11,31 +8,7 @@ AHB1 veri yolunu GPIO portları için aktif eden RCC registeri: ```RCC->AHB1ENR`
                                           tempValue = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOAEN);	 \
                                           UNUSED(tempValue);											                   \
                                         }while(0)
-
-#define RCC_GPIOB_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										                   \
-                                        SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);					         \
-                                        tempValue = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);	   \
-                                        UNUSED(tempValue);											                     \
-                                      }while(0)
-
-#define RCC_GPIOC_CLK_ENABLE()		  do{ 	uint32_t tempValue = 0;										                  \
-                                          SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOCEN);					        \
-                                          tempValue = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOCEN);	  \
-                                          UNUSED(tempValue);											                    \
-                                        }while(0)
-
-#define RCC_GPIOD_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										                     \
-                                        SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN);					           \
-                                        tempValue = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN);	     \
-                                        UNUSED(tempValue);											                       \
-                                      }while(0)
-
+     
 #define RCC_GPIOA_CLK_DISABLE()			CLEAR_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOAEN)
-#define RCC_GPIOB_CLK_DISABLE()			CLEAR_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN)
-#define RCC_GPIOC_CLK_DISABLE()			CLEAR_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOCEN)
-#define RCC_GPIOD_CLK_DISABLE()			CLEAR_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN)
 ```
-
-
-
 
