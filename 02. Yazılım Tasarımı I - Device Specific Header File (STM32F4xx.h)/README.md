@@ -7,7 +7,24 @@ Mikrodenetleyici için temel tanımlamaların yapıldığı dosyadır.
 - Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
 
 ## :dart: Yol Haritası      
-## **1. Temel Adres Tanımlamaları**  
+## **1. Diğer Tanımlamalar**
+```c
+#include <stdint.h>							// uint8_t, uint32_t değişken türleri için kullanılır.
+
+#define __IO volatile							// // volatile keywordu yerine standart olan __IO keyword'un kullanılması
+#define SET_BIT(REG, BIT)			((REG) |=  (BIT))	// Bt Set
+#define CLEAR_BIT(REG, BIT)			((REG) &= ~(BIT))	// Bit Reset
+#define READ_BIT(REG, BIT			((REG) &   (BIT))	// Read Bit 
+#define UNUSED(x)				(void)x			// Derleyici "Bu fonksiyon kullanılmıyor" hatasını vermesin diye kullanılan fonksiyon.
+
+typedef enum								// Register ENABLE veya DISABLE yapabilmek için kullanılan yapı
+{
+	DISABLE = 0x0U,
+	ENABLE = !DISABLE,
+}FunctionalState_t;
+```
+
+## **2. Temel Adres Tanımlamaları**  
 #### 1. Hafıza Birimlerinin Temel Adresleri     
 - FLASH & SRAM1 & SRAM2          
 ```c
@@ -50,30 +67,7 @@ typedef struct
 #include "RCC.h"
 #include "GPIO.h"
 #include "EXTI.h"
-```
-
-                     
-Varsayılan olarak tüm çevresel birimlerin veri yolları(data bus ~ clock hattı) güç tasarrufu için pasif konumdadır. Kullanılamak istenen çevresel birim için clock hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatlarını aktif veya pasif eden yapılara RCC(reset and clock control) denir.      
-
-
-### 3. Özel Tanımlamalar
-#### 1. Kütüphaneler
-- <stdint.h> | uint32_t ,uint16_t ,uint8_t gibi veri türlerini kullanabilmek için tanımladığımız kütüphanedir.              
-- "RCC.h" | Çevresel birimler için veri yollarını aktif eden fonksiyonları içerir. (GPIO için AHB1 registerini aktif eden fonksiyonlar gibi..)  
-
-#### 2. typedef Volatile               
-```c
-#define __IO volatile		// volatile keywordu yerine standart olan __IO keyword'un kullanılması
-```
-
-#### 2. Register Set - Reset - Read Fonksiyon Tanımlamaları
-```c
-#define SET_BIT(REG, BIT)			((REG) |=  (BIT))	// Bt Set
-#define CLEAR_BIT(REG, BIT)			((REG) &= ~(BIT))	// Bit Reset
-#define READ_BIT(REG, BIT			((REG) &   (BIT))	// Read Bit 
-#define UNUSED(x)				(void)x			// Derleyici "Bu fonksiyon kullanılmıyor" hatasını vermesin diye kullanılan fonksiyon. 
-```
-
+```       
 ---  
 ## :bookmark_tabs: Kaynaklar 
 ### Temel Adreslerin Tanımlanması 
