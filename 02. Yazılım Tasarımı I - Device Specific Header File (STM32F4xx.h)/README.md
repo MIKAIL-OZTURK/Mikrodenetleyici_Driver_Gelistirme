@@ -1,28 +1,13 @@
 # Device Specific Header File (STM32F407xx.h)   
 Mikrodenetleyici için temel tanımlamaların yapıldığı dosyadır. 
 
-- Hafıza Birimlerinin Adresleri (Memory Base Address)
-	- FLASH & SRAM1 & SRAM2
-- Veri Yollarının Adresleri (Peripheral Base Address)
-	- AHB1 & APB1 & APB2...
-- Her bir veriyoluna bağlı çevre birimlerinin adresleri (APB2 Peripherals Base Address...)
-- Çevre birimlerinin registerlarının bir yapı içerisinde tanımlamaları 
-	- GPIO & RCC & SYSCFG...
-- Registerlara erişebilmek için kullanılan  portların temel adresleri
-```c
-#define GPIOA						((GPIO_TypeDef_t *)(GPIOA_BASE_ADDR))
-
-Örnek Kullanımı -->    
-GPIOA->MODER gibi
-```
-
-- Bit tanımlamaları 
-
+- Temel adres değerleri arasında boşluk olamaz.
+- Temel adres değerleri _unsiged long_ olmalıdır. Bunun için temel adres değerleri **UL** ile bitmelidir. 
+- Tüm çevre birimlerinin registerları `volatile` olmak zorundadır.   
+- Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
 
 ## :dart: Yol Haritası      
 ## **1. Temel Adres Tanımlamaları**  
-- Temel adres değerleri arasında boşluk olamaz.
-- Temel adres değerleri _unsiged long_ olmalıdır. Bunun için temel adres değerleri **UL** ile bitmelidir. 
 #### 1. Hafıza Birimlerinin Temel Adresleri     
 - FLASH & SRAM1 & SRAM2          
 ```c
@@ -52,16 +37,22 @@ typedef struct
 ÖRNEK | #define GPIOC			((GPIO_TypeDef_t *)(GPIOC_BASE_ADDR)))	 // GPIOC->MODER 
 ```
 
+#### 6. Clock Hatları için Bit Tanımlamaları 
+```c
+ÖRNEK |                      
+#define RCC_AHB1ENR_GPIOCEN_Pos				(2U)					/*!< RCC AHB1ENR register GPIOCEN Bit Position      */
+#define RCC_AHB1ENR_GPIOCEN_Msk				(0x1 << RCC_AHB1ENR_GPIOCEN_Pos)	/*!< RCC AHB1ENR register GPIOCEN Bit Mask 	    */
+#define RCC_AHB1ENR_GPIOCEN				RCC_AHB1ENR_GPIOCEN_Msk			/*!< RCC AHB1ENR register GPIOCEN Bit Macro	    */
+```
 
+#### 7. Çevresel Birim Fonksiyonlarının Bulunuduğu Kütüphane Dosyaları 
+```c
+#include "RCC.h"
+#include "GPIO.h"
+#include "EXTI.h"
+```
 
-
-
-
-## **2. Çevresel Birim Yapılarının Tanımlanması**    
-- Tüm çevre birimlerinin registerları `volatile` olmak zorundadır.   
-- Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
-#### 1. GPIO (General Purpose I/O)              
-#### 2. RCC (Reset and Clock Control)                          
+                     
 Varsayılan olarak tüm çevresel birimlerin veri yolları(data bus ~ clock hattı) güç tasarrufu için pasif konumdadır. Kullanılamak istenen çevresel birim için clock hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatlarını aktif veya pasif eden yapılara RCC(reset and clock control) denir.      
 
 
