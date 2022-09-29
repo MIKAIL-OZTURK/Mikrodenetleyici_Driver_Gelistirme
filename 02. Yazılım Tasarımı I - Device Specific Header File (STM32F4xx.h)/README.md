@@ -20,7 +20,7 @@ GPIOA->MODER gibi
 
 
 ## :dart: Yol Haritası      
-### **1. Temel Adres Tanımlamaları**  
+## **1. Temel Adres Tanımlamaları**  
 - Temel adres değerleri arasında boşluk olamaz.
 - Temel adres değerleri _unsiged long_ olmalıdır. Bunun için temel adres değerleri **UL** ile bitmelidir. 
 #### 1. Hafıza Birimlerinin Temel Adresleri     
@@ -33,13 +33,31 @@ GPIOA->MODER gibi
 ```c
 ÖRNEK | #define AHB1_BASE_ADDR		(PERIPH_BASE_ADDR + 0x00020000UL)
 ```   
-#### 3. Veri Yollarına Bağlı Çevresel Birimlerin Temel Adresleri 
+#### 3. Çevresel Birimlerin Temel Adresleri 
 ```c
 ÖRNEK | #define GPIOC_BASE_ADDR		(AHB1_BASE_ADDR + 0x0800UL)	
 ```
+#### 4. Çevresel Birimleri Registerler Yapıları 
+```c
+ÖRNEK | GPIO Peripherals Structure Definitions
+typedef struct
+{
+	__IO uint32_t MODER;		/*!< GPIO port mode register 			Address Offset = 0x00 */
+	__IO uint32_t OTYPER;		/*!< GPIO port output type register 		Address Offset = 0x04 */
+	....
+}GPIO_TypeDef_t;
+```    
+#### 5. Çevresel Birimleri Registerler Yapıları erişmek için Port Tanımlaması 
+```c
+ÖRNEK | #define GPIOC			((GPIO_TypeDef_t *)(GPIOC_BASE_ADDR)))	 // GPIOC->MODER 
+```
 
 
-### **2. Çevresel Birim Yapılarının Tanımlanması**    
+
+
+
+
+## **2. Çevresel Birim Yapılarının Tanımlanması**    
 - Tüm çevre birimlerinin registerları `volatile` olmak zorundadır.   
 - Çevresel birimlerin registerları tanımlanırken doğru konfigürasyon için sırası ile tanımlanmalıdır. 
 #### 1. GPIO (General Purpose I/O)              
