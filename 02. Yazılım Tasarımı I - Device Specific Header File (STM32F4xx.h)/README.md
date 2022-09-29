@@ -1,9 +1,24 @@
 # Device Specific Header File (STM32F407xx.h)   
+Mikrodenetleyici için temel tanımlamaların yapıldığı dosyadır. 
+
+- Hafıza Birimlerinin Adresleri (Memory Base Address)
+	- FLASH & SRAM1 & SRAM2
+- Veri Yollarının Adresleri (Peripheral Base Address)
+	- AHB1 & APB1 & APB2...
+- Her bir veriyoluna bağlı çevre birimlerinin adresleri (APB2 Peripherals Base Address...)
+- Çevre birimlerinin registerlarının bir yapı içerisinde tanımlamaları 
+	- GPIO & RCC & SYSCFG...
+- Registerlara erişebilmek için kullanılan  portların temel adresleri
+```c
+#define GPIOA						((GPIO_TypeDef_t *)(GPIOA_BASE_ADDR))
+
+Örnek Kullanımı -->    
+GPIOA->MODER gibi
+```
+
+- Bit tanımlamaları 
 
 
-### Nedir ?
-### Ne İşe Yarar ? 
-### İçeriği Nedir ? 
 ### Kaynakça 
 
 
