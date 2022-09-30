@@ -3,8 +3,7 @@ Buradaki konular ve kodlar "Mikrodenetleyici Driver Geliştirme (GPIO, SPI, USAR
 
 # :dart: Yol Haritası 
 1. Temel Adres Tanımlamaları ve Registerler
-2. Çevresel Birime ait Dosyoların Oluşturulması 
-    - xxxx.h (Registerın Alacağı Değerler & Yapılar & API Prototipleri)
+2. Çevresel Birime ait Dosyaların Oluşturulması 
+    - xxxx.h (Registerlerin Alacağı Değerler & Kullanıcı Yapıları & API Prototipleri)
     - xxxx.c (API Tanımlamaları)
     
-
