@@ -29,11 +29,11 @@ void EXTI0_IRQHandler()
 1. Fonksiyon Tanımlamaları ( API's )
 
 ## SYSCFG Registers
-**1. SYSCFG external interrupt configuration register 1 (SYSCFG_EXTICR1)**
-**2. SYSCFG external interrupt configuration register 2 (SYSCFG_EXTICR2)** 
-**3. SYSCFG external interrupt configuration register 3 (SYSCFG_EXTICR3)** 
-**4. SYSCFG external interrupt configuration register 4 (SYSCFG_EXTICR4)** 
-
+**1. SYSCFG external interrupt configuration register 1 (SYSCFG_EXTICR1)**                              
+**2. SYSCFG external interrupt configuration register 2 (SYSCFG_EXTICR2)**                                           
+**3. SYSCFG external interrupt configuration register 3 (SYSCFG_EXTICR3)**                                            
+**4. SYSCFG external interrupt configuration register 4 (SYSCFG_EXTICR4)**                                             
+                                 
 ![Ekran görüntüsü 2022-09-30 160823](https://user-images.githubusercontent.com/75627147/193276552-cd1161ad-3eb8-4af6-85ef-50b5f221c554.png)         
 Pin ve port seçilir. Örneğin C portu 2. pin için -> EXTI2'ye 0010 yazılır.                  
 
