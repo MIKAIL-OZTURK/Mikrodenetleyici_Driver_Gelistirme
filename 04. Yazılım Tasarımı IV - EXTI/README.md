@@ -63,6 +63,28 @@ void EXTI0_IRQHandler()
 ## NVIC Registers
 
 
+### ÖRNEK
+```c
+static void GPIO_ButtonInterruptConfig()
+{
+	EXTI_InitTypeDef_t EXTI_Struct = { 0 };				// Lokal değişken olduğu için tüm değerler sıfırlandı. 
+	
+	/* SYSCFG Config --> */
+	RCC_SYSCFG_CLK_ENABLE();					// Clock hattı aktfi edildi.
+	EXTI_LineConfig(EXTI_PortSource_GPIOA, EXTI_LineSource_0);	// Port ve pin numaraları belirlendi. A0 
+
+	/* EXTI Config --> */ 
+	EXTI_Struct.EXTI_LineCmd = ENABLE;				// İnterrupt veya event mod aktif edildi
+	EXTI_Struct.EXTI_LineNumber = EXTI_LineSource_0;		// Port seçimi yapıldı.
+	EXTI_Struct.EXTI_Mode = EXTI_MODE_Interrupt;			// İnterrupt modu ayarlandı.
+	EXTI_Struct.TriggerSelection = EXTI_Trigger_Rising;		// Yükselen kenar ayarlandı.
+	EXTI_Init(&EXTI_Struct);					// Konfigüre ettiğimiz ayarları gerekli pine yükledik. 
+
+	/* NVIC Config --> */
+	NVIC_EnableInterrupt(EXTI0_IRQNumber);				// Interruprt'a izim verdik. (EXTI0 --> A portu 0. pin)
+}
+```
+
 
 ## Kaynaklar 
 - **SYSCFG** : STM32F407 User(Referance) Manual -> 9. System configuration controller (SYSCFG) 
