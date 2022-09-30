@@ -5,7 +5,6 @@
 3. NVIC : Konfigüre edilen kesme işlemini aktfi hale getirir. Mikroişlemcide bulunur.                    
 
 
-
 **Interrupt Service Routine (ISR)**                     
 İşlemci interrupt'a girdiğinde yapması gerekenleri söyleyen fonksiyondur. Kaynak: STM32CubeİDE -> "Startup" Klasörü -> "startup_stm32f407vgtx.s" dosyası     
 > ISR fonksiyonları kısa tutulmalıdır ve içerisinde döngü kullanılmamalıdır.                  
@@ -61,39 +60,12 @@ void EXTI0_IRQHandler()
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## NVIC Registers
+
+
+
+## Kaynaklar 
+- **SYSCFG** : STM32F407 User(Referance) Manual -> 9. System configuration controller (SYSCFG) 
+- **EXTI** : STM32F407 User(Referance) Manual -> 12. Interrupts and events 
+- **NVIC** : Cortex -M4 Devices Generic User Guide -> Cortex-M4 Peripherals -> Nested Vectored Interrupt Controller
+
