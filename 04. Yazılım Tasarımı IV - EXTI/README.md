@@ -2,9 +2,11 @@
 Önceliği yüksek işlerin mikrodenetleyici tarafından ana program akışını keserek yapılmasına interrupt denir. Kesme birimini kullanabilmek için üç birimi konfigüre etmek gerekir. 
 1. SYSCFG : Kesme işleminin hangi port ve pinde gerçekleşeceğini bildirir. Mikrodenetleyicide bulunur.             
 2. EXTI : Maskelemeyi kaldırır ve registerların alacağı değeleri(düşen kenar, yükselen kenar, interrupt mode vs.) ayarlar. Mikrodenetleyicide bulunur.          
-3. NVIC : Konfigüre edilen kesme işlemini aktfi hale getirir. Mikroişlemcide bulunur. 
+3. NVIC : Konfigüre edilen kesme işlemini aktfi hale getirir. Mikroişlemcide bulunur.                    
 
-**Interrupt Service Routine (ISR)**
+
+
+**Interrupt Service Routine (ISR)**                     
 İşlemci interrupt'a girdiğinde yapması gerekenleri söyleyen fonksiyondur. Kaynak: STM32CubeİDE -> "Startup" Klasörü -> "startup_stm32f407vgtx.s" dosyası     
 > ISR fonksiyonları kısa tutulmalıdır ve içerisinde döngü kullanılmamalıdır. 
 
