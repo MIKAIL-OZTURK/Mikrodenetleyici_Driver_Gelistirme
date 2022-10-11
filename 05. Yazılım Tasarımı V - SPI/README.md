@@ -29,7 +29,7 @@ Polarity )
 - CPHA: Ne zaman örnekleme alınacağını/okunacağını belirler. CPHA 0 ise yükseelen kenarda, CPHA 1 ise düşen kenarda veri alınır/okunur. (Clock Phase)                   
 
 2. **SPI control register 2 (SPI_CR2)**                                
-3. **SPI status register (SPI_SR)**  - Bayrakların(Flag) olduğu registerdir.              
+3. **SPI status register (SPI_SR)**  -  Bayrakların(Flags) bulunduğu registerdir.                
 - RXNE: Veri okunuyor mu okunmuyor mu bayrağıdıır. (Receive buffer not empty)           
 - TXE: Veri alınıyor mu alnımıyor mu bayrağıdır. (Transmit buffer empty)              
 - CHSIDE: (Channel Side)...                    
