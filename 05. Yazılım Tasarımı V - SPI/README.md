@@ -26,7 +26,7 @@
 - MSTR: Cihazın Master veya Slave olmasını belirler. (Master Selection)                   
 - CPOL: Clock hattının başlangıç ve bitiş değerlerini ayarlar. CPOL 0 ise Clock lojik 0'dan başlar ve biter. CPOL 1 ise Clock lojik 1'den başlar ve biter. (Clock 
 Polarity )                                              
-- CPHA: Ne zaman örnekleme alınacağını/okunacağını belirler. CPHA 0 ise yükseelen kenarda, CPHA 1 ise düşen kenarda veri alınır/okunur. (Clock Phase)                
+- CPHA: Ne zaman örnekleme alınacağını/okunacağını belirler. CPHA 0 ise yükseelen kenarda, CPHA 1 ise düşen kenarda veri alınır/okunur. (Clock Phase)                   
 
 2. **SPI control register 2 (SPI_CR2)**                                
 3. **SPI status register (SPI_SR)**  - Bayrakların(Flag) olduğu registerdir.              
@@ -40,7 +40,7 @@ Polarity )
 - BSY: SPI'ın meşgul mu değil mi bayrağıdır. (Busy Flag)                   
 - FRE: (Frame Format Error)                  
 
-4. **SPI data register (SPI_DR)** - Seri iletişim sonunda elde edilen veriy barındıran registerdir.                                              
+4. **SPI data register (SPI_DR)** - Seri iletişim sonunda elde edilen veriyi barındıran registerdir.                                              
 5. **SPI CRC polynomial register (SPI_CRCPR)**                                
 6. **SPI RX CRC register (SPI_RXCRCR)**                                  
 7. **SPI TX CRC register (SPI_TXCRCR)**                            
