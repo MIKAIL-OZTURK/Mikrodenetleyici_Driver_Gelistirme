@@ -48,6 +48,22 @@
 										}while(0)
 #define RCC_SPI3_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_SPI3EN  )
 
+
+#define RCC_USART2_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
+											SET_BIT(RCC->APB1ENR, RCC_APB1ENR_USART2EN);				\
+											tempValue = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_USART2EN);	\
+											UNUSED(tempValue);											\
+										}while(0)
+#define RCC_USART2_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_USART2EN  )
+
+#define RCC_USART3_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
+											SET_BIT(RCC->APB1ENR, RCC_APB1ENR_USART3EN);				\
+											tempValue = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_USART3EN);	\
+											UNUSED(tempValue);											\
+										}while(0)
+#define RCC_USART3_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_USART3EN  )
+
+
 /* RCC APB2 Peripherals Clock Control Macro Definitions */
 #define RCC_SYSCFG_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
 											SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SYSCFG);					\

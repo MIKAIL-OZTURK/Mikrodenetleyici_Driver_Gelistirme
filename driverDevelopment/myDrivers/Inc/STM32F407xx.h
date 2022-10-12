@@ -140,29 +140,43 @@ typedef struct{
 
 /* EXTI Peripherals Structure Definitions */
 typedef struct{
-	__IO uint32_t IMR;						/*!< Interrupt mask register 				Address Offset = 0x00 */
-	__IO uint32_t EMR;						/*!< Event mask register  					Address Offset = 0x04 */
-	__IO uint32_t RTSR;						/*!< Rising trigger selection register		Address Offset = 0x08 */
-	__IO uint32_t FTSR;						/*!< Falling trigger selection register		Address Offset = 0x0C */
-	__IO uint32_t SWIER;					/*!< Software interrupt event register		Address Offset = 0x10 */
-	__IO uint32_t PR;						/*!< Pending register						Address Offset = 0x14 */
+	__IO uint32_t IMR;						/*!< Interrupt mask register 					Address Offset = 0x00 */
+	__IO uint32_t EMR;						/*!< Event mask register  						Address Offset = 0x04 */
+	__IO uint32_t RTSR;						/*!< Rising trigger selection register			Address Offset = 0x08 */
+	__IO uint32_t FTSR;						/*!< Falling trigger selection register			Address Offset = 0x0C */
+	__IO uint32_t SWIER;					/*!< Software interrupt event register			Address Offset = 0x10 */
+	__IO uint32_t PR;						/*!< Pending register							Address Offset = 0x14 */
 
 }EXTI_TypeDef_t;
 
 /* SPI Peripherals Structure Definitions */
 typedef struct{
 
-	__IO uint32_t CR1;						/*!< SPI control register 1					Address Offset = 0x00 */
-	__IO uint32_t CR2;						/*!< SPI control register 2 				Address Offset = 0x04 */
-	__IO uint32_t SR;						/*!< SPI status register 					Address Offset = 0x08 */
-	__IO uint32_t DR;						/*!< SPI data register						Address Offset = 0x0C */
-	__IO uint32_t CRCPR;					/*!< SPI CRC polynomial register			Address Offset = 0x10 */
-	__IO uint32_t RXCRCR;					/*!< SPI RX CRC register					Address Offset = 0x14 */
-	__IO uint32_t TXCRCR;					/*!< SPI TX CRC register					Address Offset = 0x18 */
-	__IO uint32_t I2SCFGR;					/*!< SPI_I2S configuration register			Address Offset = 0x1C */
-	__IO uint32_t I2SPR;					/*!< SPI_I2S prescaler register				Address Offset = 0x20 */
+	__IO uint32_t CR1;						/*!< SPI control register 1						Address Offset = 0x00 */
+	__IO uint32_t CR2;						/*!< SPI control register 2 					Address Offset = 0x04 */
+	__IO uint32_t SR;						/*!< SPI status register 						Address Offset = 0x08 */
+	__IO uint32_t DR;						/*!< SPI data register							Address Offset = 0x0C */
+	__IO uint32_t CRCPR;					/*!< SPI CRC polynomial register				Address Offset = 0x10 */
+	__IO uint32_t RXCRCR;					/*!< SPI RX CRC register						Address Offset = 0x14 */
+	__IO uint32_t TXCRCR;					/*!< SPI TX CRC register						Address Offset = 0x18 */
+	__IO uint32_t I2SCFGR;					/*!< SPI_I2S configuration register				Address Offset = 0x1C */
+	__IO uint32_t I2SPR;					/*!< SPI_I2S prescaler register					Address Offset = 0x20 */
 
 }SPI_TypeDef_t;
+
+/* USART Peripherals Structure Definitions */
+typedef struct
+{
+	__IO uint32_t SR;						/*!< USART Status register						Address Offset = 0x00 */
+	__IO uint32_t DR;						/*!< USART Data register						Address Offset = 0x04 */
+	__IO uint32_t BRR;						/*!< USART Baud rate register					Address Offset = 0x08 */
+	__IO uint32_t CR1;						/*!< USART Control register 1					Address Offset = 0x0C */
+	__IO uint32_t CR2;						/*!< USART Control register 2					Address Offset = 0x10 */
+	__IO uint32_t CR3;						/*!< USART Control register 3					Address Offset = 0x14 */
+	__IO uint32_t GTPR;						/*!< USART Guard time and prescaler register	Address Offset = 0x18 */
+
+}USART_TypeDef_t;
+
 
 /* Base Address definitions of ports */
 #define GPIOA								( (GPIO_TypeDef_t *	)(GPIOA_BASE_ADDR)	)
@@ -176,32 +190,43 @@ typedef struct{
 #define SPI1								( (SPI_TypeDef_t *	)(SPI1_BASE_ADDR)	)
 #define SPI2								( (SPI_TypeDef_t *	)(SPI2_BASE_ADDR)	)
 #define SPI3								( (SPI_TypeDef_t *	)(SPI3_BASE_ADDR)	)
+#define USART2								( (USART_TypeDef_t *)(USART2_BASE_ADDR)	)
+#define USART3								( (USART_TypeDef_t *)(USART3_BASE_ADDR)	)
+#define UART4								( (USART_TypeDef_t *)(UART4_BASE_ADDR)	)
+#define UART5								( (USART_TypeDef_t *)(UART5_BASE_ADDR)	)
 
 /* Bit Definition */
 #define RCC_AHB1ENR_GPIOAEN_Pos				(0U)										/*!< RCC AHB1ENR register GPIOAEN Bit Position  */
 #define RCC_AHB1ENR_GPIOAEN_Msk				(0x1 << RCC_AHB1ENR_GPIOAEN_Pos)			/*!< RCC AHB1ENR register GPIOAEN Bit Mask 	    */
-#define RCC_AHB1ENR_GPIOAEN					RCC_AHB1ENR_GPIOAEN_Msk						/*!< RCC AHB1ENR register GPIOAEN Bit Macro	    */
+#define RCC_AHB1ENR_GPIOAEN					RCC_AHB1ENR_GPIOAEN_Msk						/*!< RCC AHB1ENR register GPIOAEN Macro	    	*/
 #define RCC_AHB1ENR_GPIOBEN_Pos				(1U)										/*!< RCC AHB1ENR register GPIOBEN Bit Position  */
 #define RCC_AHB1ENR_GPIOBEN_Msk				(0x1 << RCC_AHB1ENR_GPIOBEN_Pos)			/*!< RCC AHB1ENR register GPIOBEN Bit Mask	    */
-#define RCC_AHB1ENR_GPIOBEN					RCC_AHB1ENR_GPIOBEN_Msk						/*!< RCC AHB1ENR register GPIOBEN Bit Macro     */
+#define RCC_AHB1ENR_GPIOBEN					RCC_AHB1ENR_GPIOBEN_Msk						/*!< RCC AHB1ENR register GPIOBEN Macro     	*/
 #define RCC_AHB1ENR_GPIOCEN_Pos				(2U)										/*!< RCC AHB1ENR register GPIOCEN Bit Position  */
 #define RCC_AHB1ENR_GPIOCEN_Msk				(0x1 << RCC_AHB1ENR_GPIOCEN_Pos)			/*!< RCC AHB1ENR register GPIOCEN Bit Mask 	    */
-#define RCC_AHB1ENR_GPIOCEN					RCC_AHB1ENR_GPIOCEN_Msk						/*!< RCC AHB1ENR register GPIOCEN Bit Macro	    */
+#define RCC_AHB1ENR_GPIOCEN					RCC_AHB1ENR_GPIOCEN_Msk						/*!< RCC AHB1ENR register GPIOCEN Macro	    	*/
 #define RCC_AHB1ENR_GPIODEN_Pos				(3U)										/*!< RCC AHB1ENR register GPIODEN Bit Position  */
 #define RCC_AHB1ENR_GPIODEN_Msk				(0x1 << RCC_AHB1ENR_GPIODEN_Pos)			/*!< RCC AHB1ENR register GPIODEN Bit Mask	    */
-#define RCC_AHB1ENR_GPIODEN					RCC_AHB1ENR_GPIODEN_Msk						/*!< RCC AHB1ENR register GPIODEN Bit Macro     */
-#define RCC_APB2ENR_SYSCFG_Pos				(14U)										/*!< RCC APB2ENR register SSYCFG Bit Position 	*/
-#define RCC_APB2ENR_SYSCFG_Msk				(0x1 << RCC_APB2ENR_SYSCFG_Pos)				/*!< RCC APB2ENR register SSYCFG Bit Mask 		*/
-#define RCC_APB2ENR_SYSCFG					RCC_APB2ENR_SYSCFG_Msk						/*!< RCC APB2ENR register SSYCFG Bit Macro 		*/
-#define RCC_APB2ENR_SPI1EN_Pos				(12U)										/*!< RCC APB2ENR register SPI1 Bit Position 	*/
-#define RCC_APB2ENR_SPI1EN_Msk				(0x1 << RCC_APB2ENR_SPI1EN_Pos)				/*!< RCC APB2ENR register SPI1 Bit Mask 		*/
-#define RCC_APB2ENR_SPI1EN					RCC_APB2ENR_SPI1EN_Msk						/*!< RCC APB2ENR register SPI1 Bit Macro 		*/
+#define RCC_AHB1ENR_GPIODEN					RCC_AHB1ENR_GPIODEN_Msk						/*!< RCC AHB1ENR register GPIODEN Macro     	*/
 #define RCC_APB1ENR_SPI2EN_Pos				(14U)										/*!< RCC APB1ENR register SPI2 Bit Position 	*/
 #define RCC_APB1ENR_SPI2EN_Msk				(0x1 << RCC_APB1ENR_SPI2EN_Pos)				/*!< RCC APB1ENR register SPI2 Bit Mask 		*/
-#define RCC_APB1ENR_SPI2EN					RCC_APB1ENR_SPI2EN_Msk						/*!< RCC APB1ENR register SPI2 Bit Macro 		*/
+#define RCC_APB1ENR_SPI2EN					RCC_APB1ENR_SPI2EN_Msk						/*!< RCC APB1ENR register SPI2 Macro 			*/
 #define RCC_APB1ENR_SPI3EN_Pos				(15U)										/*!< RCC APB1ENR register SPI3 Bit Position 	*/
 #define RCC_APB1ENR_SPI3EN_Msk				(0x1 << RCC_APB1ENR_SPI3EN_Pos)				/*!< RCC APB1ENR register SPI3 Bit Mask 		*/
-#define RCC_APB1ENR_SPI3EN					RCC_APB1ENR_SPI3EN_Msk						/*!< RCC APB1ENR register SPI3 Bit Macro 		*/
+#define RCC_APB1ENR_SPI3EN					RCC_APB1ENR_SPI3EN_Msk						/*!< RCC APB1ENR register SPI3 Macro 			*/
+#define RCC_APB1ENR_USART2EN_Pos			(17U)										/*!< RCC APB1ENR register USART2 Bit Position 	*/
+#define RCC_APB1ENR_USART2EN_Msk			(0x1 << RCC_APB1ENR_USART2_Pos)				/*!< RCC APB1ENR register USART2 Bit Mask 		*/
+#define RCC_APB1ENR_USART2EN				RCC_APB1ENR_USART2EN_Msk					/*!< RCC APB1ENR register USART2 Macro	 		*/
+#define RCC_APB1ENR_USART3EN_Pos			(18U)										/*!< RCC APB1ENR register USART3 Bit Position 	*/
+#define RCC_APB1ENR_USART3EN_Msk			(0x1 << RCC_APB1ENR_USART3_Pos)				/*!< RCC APB1ENR register USART3 Bit Mask 		*/
+#define RCC_APB1ENR_USART3EN				RCC_APB1ENR_USART3EN_Msk					/*!< RCC APB1ENR register USART3 Macro	 		*/
+#define RCC_APB2ENR_SYSCFG_Pos				(14U)										/*!< RCC APB2ENR register SSYCFG Bit Position 	*/
+#define RCC_APB2ENR_SYSCFG_Msk				(0x1 << RCC_APB2ENR_SYSCFG_Pos)				/*!< RCC APB2ENR register SSYCFG Bit Mask 		*/
+#define RCC_APB2ENR_SYSCFG					RCC_APB2ENR_SYSCFG_Msk						/*!< RCC APB2ENR register SSYCFG Macro 			*/
+#define RCC_APB2ENR_SPI1EN_Pos				(12U)										/*!< RCC APB2ENR register SPI1 Bit Position 	*/
+#define RCC_APB2ENR_SPI1EN_Msk				(0x1 << RCC_APB2ENR_SPI1EN_Pos)				/*!< RCC APB2ENR register SPI1 Bit Mask 		*/
+#define RCC_APB2ENR_SPI1EN					RCC_APB2ENR_SPI1EN_Msk						/*!< RCC APB2ENR register SPI1 Macro 			*/
+
 #define SPI_SR_Busy							(7U)
 #define SPI_SR_TxE							(1U)
 #define SPI_SR_RxNE							(0U)
@@ -209,6 +234,7 @@ typedef struct{
 #define SPI_CR1_DFF							(11U)
 #define SPI_CR2_TXEIE						(7U)
 #define SPI_CR2_RXNEIE						(6U)
+#define UART_CR2_STOP						(12U)
 
 /* Flag Definitions */
 #define SPI_TxE_FLAG						(0x1U << SPI_SR_TxE)
@@ -219,5 +245,6 @@ typedef struct{
 #include "GPIO.h"
 #include "EXTI.h"
 #include "SPI.h"
+#include "USART.h"
 
 #endif /* INC_STM32F407XX_H_ */

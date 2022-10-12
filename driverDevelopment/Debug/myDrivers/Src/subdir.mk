@@ -8,19 +8,22 @@ C_SRCS += \
 ../myDrivers/Src/EXTI.c \
 ../myDrivers/Src/GPIO.c \
 ../myDrivers/Src/RCC.c \
-../myDrivers/Src/SPI.c 
+../myDrivers/Src/SPI.c \
+../myDrivers/Src/USART.c 
 
 OBJS += \
 ./myDrivers/Src/EXTI.o \
 ./myDrivers/Src/GPIO.o \
 ./myDrivers/Src/RCC.o \
-./myDrivers/Src/SPI.o 
+./myDrivers/Src/SPI.o \
+./myDrivers/Src/USART.o 
 
 C_DEPS += \
 ./myDrivers/Src/EXTI.d \
 ./myDrivers/Src/GPIO.d \
 ./myDrivers/Src/RCC.d \
-./myDrivers/Src/SPI.d 
+./myDrivers/Src/SPI.d \
+./myDrivers/Src/USART.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -30,7 +33,7 @@ myDrivers/Src/%.o myDrivers/Src/%.su: ../myDrivers/Src/%.c myDrivers/Src/subdir.
 clean: clean-myDrivers-2f-Src
 
 clean-myDrivers-2f-Src:
-	-$(RM) ./myDrivers/Src/EXTI.d ./myDrivers/Src/EXTI.o ./myDrivers/Src/EXTI.su ./myDrivers/Src/GPIO.d ./myDrivers/Src/GPIO.o ./myDrivers/Src/GPIO.su ./myDrivers/Src/RCC.d ./myDrivers/Src/RCC.o ./myDrivers/Src/RCC.su ./myDrivers/Src/SPI.d ./myDrivers/Src/SPI.o ./myDrivers/Src/SPI.su
+	-$(RM) ./myDrivers/Src/EXTI.d ./myDrivers/Src/EXTI.o ./myDrivers/Src/EXTI.su ./myDrivers/Src/GPIO.d ./myDrivers/Src/GPIO.o ./myDrivers/Src/GPIO.su ./myDrivers/Src/RCC.d ./myDrivers/Src/RCC.o ./myDrivers/Src/RCC.su ./myDrivers/Src/SPI.d ./myDrivers/Src/SPI.o ./myDrivers/Src/SPI.su ./myDrivers/Src/USART.d ./myDrivers/Src/USART.o ./myDrivers/Src/USART.su
 
 .PHONY: clean-myDrivers-2f-Src
 

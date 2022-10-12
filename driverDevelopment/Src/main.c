@@ -6,6 +6,7 @@ static void SPI_Config();
 static void SPI_GPIO_Config();
 
 SPI_HandleTypeDef_t SPI_Handle;
+USART_HandleTypedef_t USART_Handle;
 
 void EXTI0_IRQHandler()
 {
