@@ -33,10 +33,21 @@
 #define USART_HW_RTS					( (uint32_t)(0x00000100) )
 #define USART_HW_CTS_RTS				( (uint32_t)(0x00000300) )
 
+typedef enum
+{
+	USART_FLAG_RESET = 0x0U,
+	USART_FLAG_SET = !USART_FLAG_RESET
+
+}USART_FlagStatus_t;
+
+
+#define __USART_DIV_VALUE_8(__CLOCK__, __BAUDRATE__)		( (25U * (uint32_t)(__CLOCK__)) / (4U * (uint32_t)(__BAUDRATE__)) )
+#define __USART_DIV_VALUE_16(__CLOCK__, __BAUDRATE__)		( (25U * (uint32_t)(__CLOCK__)) / (2U * (uint32_t)(__BAUDRATE__)) )
+
 typedef struct
 {
 	uint32_t Mode;						/*!< Transmission and Reception Modes @def_group MODE_Types 		*/
-	uint32_t BaudRate;					/*!< Transmission and Reception Modes @def_group MODE_Types 		*/
+	uint32_t BaudRate;					/*!< User Value for UART Baudrate							 		*/
 	uint32_t WorldLenght;				/*!< 8 Bits & 9 Bits  Modes @def_group WordLenght_Types 			*/
 	uint32_t Parity;					/*!< Even & Odd Parity Modes @def_group Parity_Modes 				*/
 	uint32_t StopBits;					/*!< Stop Bits Modes @def_group Stop_Bits 							*/
@@ -53,17 +64,10 @@ typedef struct
 }USART_HandleTypedef_t;
 
 void USART_Init(USART_HandleTypedef_t *USART_Handle);
-
-
-
-
-
-
-
-
-
-
-
+void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
+void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
+void USART_PeriphCmd(USART_HandleTypedef_t *USART_Handle, FunctionalState_t stateOfUSART);
+USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint16_t flagName);
 
 
 

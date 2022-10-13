@@ -190,10 +190,12 @@ typedef struct
 #define SPI1								( (SPI_TypeDef_t *	)(SPI1_BASE_ADDR)	)
 #define SPI2								( (SPI_TypeDef_t *	)(SPI2_BASE_ADDR)	)
 #define SPI3								( (SPI_TypeDef_t *	)(SPI3_BASE_ADDR)	)
+#define USART1								( (USART_TypeDef_t *)(USART1_BASE_ADDR)	)
 #define USART2								( (USART_TypeDef_t *)(USART2_BASE_ADDR)	)
 #define USART3								( (USART_TypeDef_t *)(USART3_BASE_ADDR)	)
 #define UART4								( (USART_TypeDef_t *)(UART4_BASE_ADDR)	)
 #define UART5								( (USART_TypeDef_t *)(UART5_BASE_ADDR)	)
+#define USART6 								( (USART_TypeDef_t *)(USART6_BASE_ADDR)	)
 
 /* Bit Definition */
 #define RCC_AHB1ENR_GPIOAEN_Pos				(0U)										/*!< RCC AHB1ENR register GPIOAEN Bit Position  */
@@ -215,7 +217,7 @@ typedef struct
 #define RCC_APB1ENR_SPI3EN_Msk				(0x1 << RCC_APB1ENR_SPI3EN_Pos)				/*!< RCC APB1ENR register SPI3 Bit Mask 		*/
 #define RCC_APB1ENR_SPI3EN					RCC_APB1ENR_SPI3EN_Msk						/*!< RCC APB1ENR register SPI3 Macro 			*/
 #define RCC_APB1ENR_USART2EN_Pos			(17U)										/*!< RCC APB1ENR register USART2 Bit Position 	*/
-#define RCC_APB1ENR_USART2EN_Msk			(0x1 << RCC_APB1ENR_USART2_Pos)				/*!< RCC APB1ENR register USART2 Bit Mask 		*/
+#define RCC_APB1ENR_USART2EN_Msk			(0x1 << RCC_APB1ENR_USART2EN_Pos)			/*!< RCC APB1ENR register USART2 Bit Mask 		*/
 #define RCC_APB1ENR_USART2EN				RCC_APB1ENR_USART2EN_Msk					/*!< RCC APB1ENR register USART2 Macro	 		*/
 #define RCC_APB1ENR_USART3EN_Pos			(18U)										/*!< RCC APB1ENR register USART3 Bit Position 	*/
 #define RCC_APB1ENR_USART3EN_Msk			(0x1 << RCC_APB1ENR_USART3_Pos)				/*!< RCC APB1ENR register USART3 Bit Mask 		*/
@@ -234,12 +236,19 @@ typedef struct
 #define SPI_CR1_DFF							(11U)
 #define SPI_CR2_TXEIE						(7U)
 #define SPI_CR2_RXNEIE						(6U)
+#define USART_CR1_UR						(13U)
 #define UART_CR2_STOP						(12U)
+#define USART_SR_TxE						(7U)
+#define USART_SR_TC							(6U)
+#define USART_SR_RxNE						(5U)
 
 /* Flag Definitions */
 #define SPI_TxE_FLAG						(0x1U << SPI_SR_TxE)
 #define SPI_Busy_FLAG						(0x1U << SPI_SR_Busy)
 #define SPI_RxNE_FLAG						(0x1U << SPI_SR_RxNE)
+#define USART_TxE_FLAG						(0x1U << USART_SR_TxE)
+#define USART_TC_FLAG						(0x1U << USART_SR_TC)
+#define USART_RxNE_FLAG						(0x1U << USART_SR_RxNE)
 
 #include "RCC.h"
 #include "GPIO.h"

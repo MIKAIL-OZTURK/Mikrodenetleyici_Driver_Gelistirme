@@ -79,4 +79,10 @@
 										}while(0)
 #define RCC_SPI1_CLK_DISABLE()			CLEAR_BIT( RCC->APB2ENR, RCC_APB2ENR_SPI1EN  )
 
+
+uint32_t RCC_GetSystemClock(void);
+uint32_t RCC_GetHClock(void);
+uint32_t RCC_GetPClock1(void);
+uint32_t RCC_GetPClock2(void);
+
 #endif /* INC_RCC_H_ */
