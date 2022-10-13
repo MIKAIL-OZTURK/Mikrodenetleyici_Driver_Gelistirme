@@ -1,5 +1,41 @@
 #include "USART.h"
 
+static void closeUSART_ISR(USART_HandleTypedef_t *USART_Handle)
+{
+	USART_Handle->TxBufferSize = 0;
+	USART_Handle->pTxBuffer = NULL;
+	USART_Handle->TxStatus = USART_BUS_FREE;
+
+	USART_Handle->Instance->CR1 &= ~(0X1U << USART_CR1_TxEIE);
+}
+
+
+
+
+static void USART_SendWith_IT(USART_HandleTypedef_t *USART_Handle)
+{
+	if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_9Bits) && (USART_Handle->Init.Parity == USART_PARITY_NONE))
+	{
+		uint16_t *p16BitsData = (uint16_t*)(USART_Handle->pTxBuffer);
+
+		USART_Handle->Instance->DR = (uint16_t)(*p16BitsData & (uint16_t)0x01FF);
+		USART_Handle->pTxBuffer += sizeof(uint16_t);
+		USART_Handle->TxBufferSize -= 2;
+	}
+	else
+	{
+		USART_Handle->Instance->DR = (uint8_t)(*(USART_Handle->pTxBuffer) & (uint8_t)0x00FF);
+		USART_Handle->pTxBuffer++;
+		USART_Handle->TxBufferSize--;
+	}
+
+	if(USART_Handle->TxBufferSize == 0)
+	{
+		closeUSART_ISR(USART_Handle);
+	}
+}
+
+
 
 
 /*
@@ -172,6 +208,29 @@ void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, ui
 }
 
 
+/*
+ * @brief	USART_PeriphCmd, Enable or disable USART Peripheral
+ *
+ * @param	USART_Handle = User config structure
+ * @param	stateOfUSART = ENABLE of DISABLE
+ *
+ * @retval	void
+ */
+void USART_TransmitData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize)
+{
+	USART_BusState_t usartBusState = USART_Handle->TxStatus;
+
+	if(usartBusState != USART_BUS_Tx)
+	{
+		USART_Handle->pTxBuffer = (uint8_t*)pData;
+		USART_Handle->TxBufferSize = (uint16_t)dataSize;
+		USART_Handle->TxISR_Function = USART_SendWith_IT;
+
+		USART_Handle->Instance->CR1 |= (0x1U << USART_CR1_TxEIE);
+	}
+}
+
+
 
 /*
  * @brief	USART_PeriphCmd, Enable or disable USART Peripheral
@@ -207,3 +266,21 @@ USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint
 {
 	return ((USART_Handle->Instance->SR & flagName) ? USART_FLAG_SET : USART_FLAG_RESET);
 }
+
+
+
+
+void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle)
+{
+	uint8_t flagValue = 0;
+	uint8_t interruptValue = 0;
+
+	flagValue = (uint8_t)((USART_Handle->Instance->SR >> 7U) & 0x1U);
+	interruptValue = (uint8_t)((USART_Handle->Instance->CR1 >> 7U) & 0x1U);
+
+	if(flagValue && interruptValue)
+	{
+		USART_Handle->TxISR_Function(USART_Handle);
+	}
+}
+

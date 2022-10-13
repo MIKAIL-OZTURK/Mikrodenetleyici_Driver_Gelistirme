@@ -29,7 +29,8 @@ typedef enum
 	EXTI2_IRQNumber = 8,
 	EXTI3_IRQNumber = 9,
 	SPI1_IRQNumber = 35,
-	SPI2_IRQNumber = 36
+	SPI2_IRQNumber = 36,
+	USART2_IRQNumber = 38
 
 }IRQNumber_TypeDef_t;
 
@@ -237,6 +238,7 @@ typedef struct
 #define SPI_CR2_TXEIE						(7U)
 #define SPI_CR2_RXNEIE						(6U)
 #define USART_CR1_UR						(13U)
+#define USART_CR1_TxEIE						(7U)
 #define UART_CR2_STOP						(12U)
 #define USART_SR_TxE						(7U)
 #define USART_SR_TC							(6U)

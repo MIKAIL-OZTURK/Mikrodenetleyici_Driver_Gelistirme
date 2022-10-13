@@ -1,21 +1,28 @@
 #include "STM32F407xx.h"
 
-static void GPIO_Config(void);
-static void USART_Config(void);
-
 USART_HandleTypedef_t USART_Handle;
 GPIO_InitTypeDef_t GPIO_InitStruct;
 
 
+static void GPIO_Config(void);
+static void USART_Config(void);
+
+void USART2_IRQHandler()
+{
+	USART_InterruptHandler(&USART_Handle);
+}
+
+
+
 int main(void)
 {
+	char messageToSend[] = "Embedded Software";
+
+
 	GPIO_Config();
 	USART_Config();
 
-	char messageToSend[20] = "";
-
-	USART_ReceiveData(&USART_Handle, (uint8_t*)messageToSend, 12);
-	USART_TransmitData(&USART_Handle, (uint8_t*)messageToSend, strlen(messageToSend));
+	USART_TransmitData_IT(&USART_Handle, (uint8_t*)messageToSend, strlen(messageToSend));
 
 	while(1)
 	{
@@ -38,6 +45,7 @@ static void USART_Config(void)
 	USART_Handle.Init.WorldLenght = USART_WORDLENGHT_8Bits;
 
 	USART_Init(&USART_Handle);
+	NVIC_EnableInterrupt(USART2_IRQNumber);	// Reference Manual -> Interruprt -> position number for usart2
 	USART_PeriphCmd(&USART_Handle, ENABLE);
 }
 
