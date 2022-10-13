@@ -47,6 +47,9 @@ void USART2_IRQHandler()
 
 ### USART.c
 ```c
+
+/**********************************************************************************************/
+
 void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle)
 {
 	uint8_t flagValue = 0;
@@ -56,9 +59,9 @@ void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle)
 	interruptValue = (uint8_t)((USART_Handle->Instance->CR1 >> 7U) & 0x1U);
 
 	if(flagValue && interruptValue)
-  {
-   USART_Handle->TxISR_Function(USART_Handle);
-  }
+	{
+		USART_Handle->TxISR_Function(USART_Handle);
+	}
 }
 
 /**********************************************************************************************/
