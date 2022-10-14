@@ -132,28 +132,6 @@ void SPI_Init(SPI_HandleTypeDef_t *SPI_Handle)
 
 
 /*
- * @brief	SPI_PeriphCmd, Enable or disable SPI Peripheral
- *
- * @param	SPI_Handle = User config structure
- * @param	stateofSPı = ENABLE of DISABLE
- *
- * @retval	void
- */
-void SPI_PeriphCmd(SPI_HandleTypeDef_t *SPI_Handle, FunctionalState_t stateofSPı)
-{
-	if(stateofSPı == ENABLE)
-	{
-		SPI_Handle->Instance->CR1 |= (0x1U << SPI_CR1_SPE);
-	}
-	else
-	{
-		SPI_Handle->Instance->CR1 &= ~(0x1U << SPI_CR1_SPE);
-	}
-}
-
-
-
-/*
  * @brief	SPI_TransmitData, Transmits data to the slave
  *
  * @param	SPI_Handle = User config structure
@@ -189,6 +167,45 @@ void SPI_TransmitData(SPI_HandleTypeDef_t *SPI_Handle, uint8_t *pData, uint16_t 
 		}
 	}
 	while(SPI_GetFlagStatus(SPI_Handle, SPI_Busy_FLAG));		// Wait for busy flag
+}
+
+
+
+/*
+ * @brief	SPI_ReceiveData, Receive data from the slave
+ *
+ * @param	SPI_Handle = User config structure
+ * @param	pBuffer = Address of data to store the values that i get
+ * @param	sizeOfData = Length of your data in bytes
+ *
+ * @retval	void
+ */
+void SPI_ReceiveData(SPI_HandleTypeDef_t *SPI_Handle, uint8_t *pBuffer, uint16_t sizeOfData)
+{
+	if(SPI_Handle->Init.DFF_Format == SPI_DFF_16BITS)
+	{
+		while(sizeOfData > 0)
+		{
+			if(SPI_GetFlagStatus(SPI_Handle, SPI_RxNE_FLAG))
+			{
+				*((uint16_t*)pBuffer) = (uint16_t)SPI_Handle->Instance->DR;
+				pBuffer += sizeof(uint16_t);
+				sizeOfData -= 2;
+			}
+		}
+	}
+	else	/* (SPI_Handle->Init.DFF_Format == SPI_DFF_8BITS) */
+	{
+		while(sizeOfData > 0)
+		{
+			if(SPI_GetFlagStatus(SPI_Handle, SPI_RxNE_FLAG))
+			{
+				*(pBuffer) = *((__IO uint8_t*)&SPI_Handle->Instance->DR);
+				pBuffer += sizeof(uint8_t);
+				sizeOfData--;
+			}
+		}
+	}
 }
 
 
@@ -258,6 +275,51 @@ void SPI_ReceiveData_IT(SPI_HandleTypeDef_t *SPI_Handle, uint8_t *pBuffer, uint1
 }
 
 
+
+/*
+ * @brief	SPI_PeriphCmd, Enable or disable SPI Peripheral
+ *
+ * @param	SPI_Handle = User config structure
+ * @param	stateofSPı = ENABLE of DISABLE
+ *
+ * @retval	void
+ */
+void SPI_PeriphCmd(SPI_HandleTypeDef_t *SPI_Handle, FunctionalState_t stateofSPı)
+{
+	if(stateofSPı == ENABLE)
+	{
+		SPI_Handle->Instance->CR1 |= (0x1U << SPI_CR1_SPE);
+	}
+	else
+	{
+		SPI_Handle->Instance->CR1 &= ~(0x1U << SPI_CR1_SPE);
+	}
+}
+
+
+
+/*
+ * @brief	SPI_GetFlagStatus, Return the flag of SR Register
+ *
+ * @param	SPI_Handle = User config structure
+ * @param	SPI_Flag = Flag name of SR Register
+ *
+ * @retval	SPI_FlagStatus_t
+ */
+SPI_FlagStatus_t SPI_GetFlagStatus(SPI_HandleTypeDef_t *SPI_Handle, uint16_t SPI_Flag)
+{
+	return (SPI_Handle->Instance->SR & SPI_Flag) ? SPI_FLAG_SET : SPI_FLAG_RESET;
+}
+
+
+
+/*
+ * @brief	SPI_InterruptHandler, Check the flag and register for interrupt
+ *
+ * @param	SPI_Handle = User config structure
+ *
+ * @retval	void
+ */
 void SPI_InterruptHandler(SPI_HandleTypeDef_t *SPI_Handle)
 {
 	uint8_t interruptSource = 0;
@@ -278,58 +340,4 @@ void SPI_InterruptHandler(SPI_HandleTypeDef_t *SPI_Handle)
 	{
 		SPI_Handle->RxISRFunction(SPI_Handle);
 	}
-}
-
-
-
-/*
- * @brief	SPI_ReceiveData, Receive data from the slave
- *
- * @param	SPI_Handle = User config structure
- * @param	pBuffer = Address of data to store the values that i get
- * @param	sizeOfData = Length of your data in bytes
- *
- * @retval	void
- */
-void SPI_ReceiveData(SPI_HandleTypeDef_t *SPI_Handle, uint8_t *pBuffer, uint16_t sizeOfData)
-{
-	if(SPI_Handle->Init.DFF_Format == SPI_DFF_16BITS)
-	{
-		while(sizeOfData > 0)
-		{
-			if(SPI_GetFlagStatus(SPI_Handle, SPI_RxNE_FLAG))
-			{
-				*((uint16_t*)pBuffer) = (uint16_t)SPI_Handle->Instance->DR;
-				pBuffer += sizeof(uint16_t);
-				sizeOfData -= 2;
-			}
-		}
-	}
-	else	/* (SPI_Handle->Init.DFF_Format == SPI_DFF_8BITS) */
-	{
-		while(sizeOfData > 0)
-		{
-			if(SPI_GetFlagStatus(SPI_Handle, SPI_RxNE_FLAG))
-			{
-				*(pBuffer) = *((__IO uint8_t*)&SPI_Handle->Instance->DR);
-				pBuffer += sizeof(uint8_t);
-				sizeOfData--;
-			}
-		}
-	}
-}
-
-
-
-/*
- * @brief	SPI_GetFlagStatus, Return the flag of SR Register
- *
- * @param	SPI_Handle = User config structure
- * @param	SPI_Flag = Flag name of SR Register
- *
- * @retval	SPI_FlagStatus_t
- */
-SPI_FlagStatus_t SPI_GetFlagStatus(SPI_HandleTypeDef_t *SPI_Handle, uint16_t SPI_Flag)
-{
-	return (SPI_Handle->Instance->SR & SPI_Flag) ? SPI_FLAG_SET : SPI_FLAG_RESET;
 }

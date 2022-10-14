@@ -5,10 +5,10 @@
 ../myDrivers/Src/SPI.c:83:13:SPI_ReceiverHelper_16Bits	16	static
 ../myDrivers/Src/SPI.c:104:13:SPI_ReceiverHelper_8Bits	16	static
 ../myDrivers/Src/SPI.c:120:6:SPI_Init	24	static
-../myDrivers/Src/SPI.c:142:6:SPI_PeriphCmd	16	static
-../myDrivers/Src/SPI.c:165:6:SPI_TransmitData	24	static
-../myDrivers/Src/SPI.c:205:6:SPI_TransmitData_IT	32	static
-../myDrivers/Src/SPI.c:238:6:SPI_ReceiveData_IT	32	static
-../myDrivers/Src/SPI.c:261:6:SPI_InterruptHandler	24	static
-../myDrivers/Src/SPI.c:294:6:SPI_ReceiveData	24	static
-../myDrivers/Src/SPI.c:332:18:SPI_GetFlagStatus	16	static
+../myDrivers/Src/SPI.c:143:6:SPI_TransmitData	24	static
+../myDrivers/Src/SPI.c:183:6:SPI_ReceiveData	24	static
+../myDrivers/Src/SPI.c:222:6:SPI_TransmitData_IT	32	static
+../myDrivers/Src/SPI.c:255:6:SPI_ReceiveData_IT	32	static
+../myDrivers/Src/SPI.c:287:6:SPI_PeriphCmd	16	static
+../myDrivers/Src/SPI.c:309:18:SPI_GetFlagStatus	16	static
+../myDrivers/Src/SPI.c:323:6:SPI_InterruptHandler	24	static

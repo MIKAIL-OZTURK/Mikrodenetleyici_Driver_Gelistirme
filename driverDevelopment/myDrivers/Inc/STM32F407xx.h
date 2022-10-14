@@ -239,6 +239,7 @@ typedef struct
 #define SPI_CR2_RXNEIE						(6U)
 #define USART_CR1_UR						(13U)
 #define USART_CR1_TxEIE						(7U)
+#define USART_CR1_RxNEIE					(5U)
 #define UART_CR2_STOP						(12U)
 #define USART_SR_TxE						(7U)
 #define USART_SR_TC							(6U)

@@ -1,6 +1,15 @@
 #include "USART.h"
 
-static void closeUSART_ISR(USART_HandleTypedef_t *USART_Handle)
+
+
+/*
+ * @brief	closeUSART_ISR_Tx, Disables the interrupt for transmission
+ *
+ * @param	USART_Handle = User config structure
+ *
+ * @retval	void
+ */
+static void closeUSART_ISR_Tx(USART_HandleTypedef_t *USART_Handle)
 {
 	USART_Handle->TxBufferSize = 0;
 	USART_Handle->pTxBuffer = NULL;
@@ -11,7 +20,31 @@ static void closeUSART_ISR(USART_HandleTypedef_t *USART_Handle)
 
 
 
+/*
+ * @brief	closeUSART_ISR_Rx, Disables the interrupt for transmission
+ *
+ * @param	USART_Handle = User config structure
+ *
+ * @retval	void
+ */
+static void closeUSART_ISR_Rx(USART_HandleTypedef_t *USART_Handle)
+{
+	USART_Handle->RxBufferSize = 0;
+	USART_Handle->pRxBuffer = NULL;
+	USART_Handle->RxStatus = USART_BUS_FREE;
 
+	USART_Handle->Instance->CR1 &= ~(0X1U << USART_CR1_RxNEIE);
+}
+
+
+
+/*
+ * @brief	USART_SendWith_IT, Stores the user data into the DR register for 8 or 16 bits format
+ *
+ * @param	USART_Handle = User config structure
+ *
+ * @retval	void
+ */
 static void USART_SendWith_IT(USART_HandleTypedef_t *USART_Handle)
 {
 	if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_9Bits) && (USART_Handle->Init.Parity == USART_PARITY_NONE))
@@ -31,7 +64,66 @@ static void USART_SendWith_IT(USART_HandleTypedef_t *USART_Handle)
 
 	if(USART_Handle->TxBufferSize == 0)
 	{
-		closeUSART_ISR(USART_Handle);
+		closeUSART_ISR_Tx(USART_Handle);
+	}
+}
+
+
+
+/*
+ * @brief	USART_ReceiveWith_IT, Reads the data register and stores into the user variable for 8 or 16 bits format
+ *
+ * @param	USART_Handle = User config structure
+ *
+ * @retval	void
+ */
+static void USART_ReceiveWith_IT(USART_HandleTypedef_t *USART_Handle)
+{
+	uint16_t *p16BitsBuffer;
+	uint8_t *p8BitsBuffer;
+
+	if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_9Bits) && (USART_Handle->Init.Parity == USART_PARITY_NONE))
+	{
+		p16BitsBuffer = (uint16_t*)USART_Handle->pRxBuffer;
+		p8BitsBuffer = NULL;
+	}
+	else
+	{
+		p8BitsBuffer = (uint8_t*)USART_Handle->pRxBuffer;
+		p16BitsBuffer = NULL;
+	}
+
+	if(p8BitsBuffer == NULL)
+	{
+		*p16BitsBuffer = (uint16_t)(USART_Handle->Instance->DR & 0x01FFU);
+		USART_Handle->pRxBuffer += sizeof(uint16_t);
+		USART_Handle->RxBufferSize -= 2;
+	}
+	else
+	{
+		if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_9Bits) && (USART_Handle->Init.Parity != USART_PARITY_NONE))
+		{
+			*p8BitsBuffer = (uint8_t)(USART_Handle->Instance->DR & 0x00FFU);
+			USART_Handle->pRxBuffer++;
+			USART_Handle->RxBufferSize--;
+		}
+		else if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_8Bits) && (USART_Handle->Init.Parity != USART_PARITY_NONE))
+		{
+			*p8BitsBuffer = (uint8_t)(USART_Handle->Instance->DR & 0x00FFU);
+			USART_Handle->pRxBuffer++;
+			USART_Handle->RxBufferSize--;
+		}
+		else
+		{
+			*p8BitsBuffer = (uint8_t)(USART_Handle->Instance->DR & 0x007FU);
+			USART_Handle->pRxBuffer++;
+			USART_Handle->RxBufferSize--;
+		}
+	}
+
+	if(USART_Handle->RxBufferSize == 0)
+	{
+		closeUSART_ISR_Rx(USART_Handle);
 	}
 }
 
@@ -208,6 +300,7 @@ void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, ui
 }
 
 
+
 /*
  * @brief	USART_PeriphCmd, Enable or disable USART Peripheral
  *
@@ -227,6 +320,31 @@ void USART_TransmitData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, 
 		USART_Handle->TxISR_Function = USART_SendWith_IT;
 
 		USART_Handle->Instance->CR1 |= (0x1U << USART_CR1_TxEIE);
+	}
+}
+
+
+
+/*
+ * @brief	USART_ReceiveData_IT, Read the data from external world with interrupt method
+ *
+ * @param	USART_Handle 	= User config structure
+ * @param	pBuffer 		= Stores the data in this variable
+ * @param	dataSize 		= Bytes numbers that we will read
+ *
+ * @retval	void
+ */
+void USART_ReceiveData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize)
+{
+	USART_BusState_t usartBusState = USART_Handle->RxStatus;
+
+	if(usartBusState != USART_BUS_Rx)
+	{
+		USART_Handle->pRxBuffer = (uint8_t*)pBuffer;
+		USART_Handle->RxBufferSize = (uint16_t)dataSize;
+		USART_Handle->RxISR_Function = USART_ReceiveWith_IT;
+
+		USART_Handle->Instance->CR1 |= (0x1U << USART_CR1_RxNEIE);
 	}
 }
 
@@ -269,7 +387,13 @@ USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint
 
 
 
-
+/*
+ * @brief	USART_InterruptHandler, Check the flag and register for interrupt
+ *
+ * @param	USART_Handle = User config structure
+ *
+ * @retval	void
+ */
 void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle)
 {
 	uint8_t flagValue = 0;
@@ -282,5 +406,12 @@ void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle)
 	{
 		USART_Handle->TxISR_Function(USART_Handle);
 	}
-}
 
+	flagValue = (uint8_t)((USART_Handle->Instance->SR >> 5U) & 0x1U);
+	interruptValue = (uint8_t)((USART_Handle->Instance->CR1 >> 5U) & 0x1U);
+
+	if(flagValue && interruptValue)
+	{
+		USART_Handle->RxISR_Function(USART_Handle);
+	}
+}
