@@ -60,7 +60,7 @@ için kullanılır.
 
 ### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)                                            
 GPIO port ve pinlerini kondigüre eder.                                   
-**GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
 **GPIO_InitTypeDef_t *GPIO_ConfigStruct*** - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
 
 ```c
@@ -187,9 +187,36 @@ void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)
 	}
 }
 ```
+            
+### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                                  
+Bir pinin değerini SET veya RESET yapar. 
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                            
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                              
+***GPIO_PinState_t pinState*** - Pin durum bilgisi alır. (GPIO_PIN_SET veya GPIO_PIN_RESET)                                       
 
-### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)               
-### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                 
+```c
+void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
+{
+	//  BSRR: Bir biti set veya reset yapar. Kullanımı:     
+	//  0 - 15 Bitler için 		1 -> Set		0 -> İşlem Yok 
+	// 16 - 31 Bitler için 		1 -> Reset 		0 -> İşlem Yok
+	
+	if(pinState == GPIO_Pin_Set)
+	{
+		GPIOx->BSRR = pinNumber;
+	}
+	else
+	{
+		GPIOx->BSRR = (pinNumber << 16U);
+	}
+	// 0-15 bitlerini SET yapmak için ilgili bite 1 yazmak yeterli. (GPIOx->BSRR = pinNumber)
+	// Ancak RESET yapmak için 16 bit ötelemek gerekir. (GPIOx->BSRR = (pinNumber << 16U))
+}
+```
+
+
+
+
 ### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)                
 ### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
 ### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
