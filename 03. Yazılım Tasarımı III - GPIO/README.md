@@ -60,8 +60,8 @@ için kullanılır.
 
 ### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)                                            
 GPIO port ve pinlerini kondigüre eder.                                   
-**GPIO_TypeDef_t *GPIOx** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
-**GPIO_InitTypeDef_t *GPIO_ConfigStruct** - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
+**GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
+**GPIO_InitTypeDef_t *GPIO_ConfigStruct*** - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
 
 ```c
 static void GPIO_LedConfig()
