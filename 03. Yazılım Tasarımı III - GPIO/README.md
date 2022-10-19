@@ -60,8 +60,8 @@ için kullanılır.
 
 ### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)                                            
 GPIO port ve pinlerini kondigüre eder.                                   
-GPIO_TypeDef_t *GPIOx - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
-GPIO_InitTypeDef_t *GPIO_ConfigStruct - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
+**GPIO_TypeDef_t *GPIOx** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
+**GPIO_InitTypeDef_t *GPIO_ConfigStruct** - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
 
 ```c
 static void GPIO_LedConfig()
@@ -79,21 +79,117 @@ static void GPIO_LedConfig()
 	GPIO_Init(GPIOD, &GPIO_LedStruct);
  }
 ```
+#### API İncelenmesi 
 
+```c
+void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)
+{
+	uint32_t position;
+	uint32_t fakePosition = 0x00U;
+	uint32_t lastPosition = 0x00U;
+	uint32_t tempValue = 0x00U;
+	
+	for(position = 0U; position < GPIO_MAX_PIN_NUMBER; position++)
+	{
+		fakePosition = (0x1U << position);
+		lastPosition = ((uint32_t)(GPIO_ConfigStruct->pinNumber) & fakePosition);	
+		if(fakePosition == lastPosition)
+		{
+	// 1. for döngüsü ile 0 - 16 bitlerini geziyoruz. (position = 1,2,3,4...15)
+	// 2. fakeValue değeri ile her bite 1 değerini yazıyoruz. (fakeValue = 0x1,0x2,0x4...0x8000)
+	// 3. Kullanıcının girdiği pin numarası ile fakeValue değerlerini ve işlemine tabi tutuyoruz. (Kontrol)
+	// 4. Eşleştikleri(fakeValue == lastValue) position değeri pin numarası olur.  
+	// Pin numarası bulunduktan sonra ilgili konfigürasyon ayarlarına geçilir -->
 
+			/* MODE CONFIG */
+			tempValue = GPIOx->MODER;
+			tempValue &= ~(0x3U << (position * 2));
+			tempValue |= (GPIO_ConfigStruct->Mode << (position * 2));
+			GPIOx->MODER = tempValue;
+	// GPIO port mode register(GPIOx_MODER) - Bir pinin modunu belirlemek için kullanılır.   
+	// 1. Register üzerinde işlem yapmıyoruz o yüzden ilgili registeri işlem yapacağımız geçici bir değişkene atadık. 
+	// 2. Güvenlik amaçlı önce ilgili bitleri temizliyoruz. 
+		// 0x3U yani iki biti 1 olan sayı(0x00000011 = 0x3U) ile tersliyoruz.  
+		// MODER reigsteri iki bit değer(0x10,0x11 gibi) alacağı için (position * 2) yapıyoruz. 
+		// Örneğin MODER5'e erişmek için (5x2) 10 ve 11. bitlere değer yazmak gerekir. 
+	// 3. Kullanıcının girdiği mod değerini işlem yaptığımız değişkene atadık. (tempValue = GPIO_MODE_INPUT gibi)
+	// 4. Mod için tüm konfigürasyonlar hazır ve MODER registeri bu konfigürasyon ayarlarına göre çalışabilir.
+	
+			if(GPIO_ConfigStruct->Mode == GPIO_MODE_OUTPUT || GPIO_ConfigStruct->Mode == GPIO_MODE_AF)
+			{
+				/* Output Type CONFIG */
+				tempValue = GPIOx->OTYPER;
+				tempValue &= ~(0x1U << position);
+				tempValue |= (GPIO_ConfigStruct->Otype << position);
+				GPIOx->OTYPER = tempValue;
 
+				/* Output Speed CONFIG */
+				tempValue = GPIOx->OSPEEDR;
+				tempValue &= ~(0x3U << (position * 2));
+				tempValue |= (GPIO_ConfigStruct->Speed << (position * 2));
+				GPIOx->OSPEEDR = tempValue;
+		// OTYPER ve OSPEEDR sadece modun OUTPUT veya ANALOG olduğu durumlarda çalışır.
+		// Adı üstünde OTYPER = Output Type... OSPEEDR = Output Speed...
+		// Konfigürasyon ayaları MODER ile aynı mnatıkla çalışır. 
+		// Geçici bir değişken oluşturuduk, güvenlik amaçlı temizledik ve kullanıcının girdiği değeri en son
+		// ilgili register'lara ilettik. 
+			}
+			/* Push Pull CONFIG */
+			tempValue = GPIOx->PUPDR;
+			tempValue &= ~(0x3U << (position * 2));
+			tempValue |= (GPIO_ConfigStruct->PuPd << (position * 2));
+			GPIOx->PUPDR = tempValue;
+		// Konfigürasyon ayaları MODER ile aynı mnatıkla çalışır. 
+		// Geçici bir değişken oluşturuduk, güvenlik amaçlı temizledik ve kullanıcının girdiği değeri en son
+		// ilgili register'lara ilettik. 
+
+			/* Alternate Mode CONFIG */
+			if(GPIO_ConfigStruct->Mode == GPIO_MODE_AF)
+			{
+				tempValue = GPIOx->AFR[position >> 3U];
+				tempValue &= ~(0xFU << ((position & 0x7U) * 4));
+				tempValue |= (GPIO_ConfigStruct->Alternate << ((position & 0x7U) * 4));
+				GPIOx->AFR[position >> 3U] = tempValue;
+			}
+		// Alternatif Funciton modu seçilmiş ise konfigürasyon ayarları yap -->
+		// AFR[0] = AFRL(alternate function low register), AFR[1] = AFRH (alternate function high register)
+		// AFRL = 0 ile 7 arasındaki bitler için işlme yapar.
+		// AFRH = 8 ile 15 arasındaki bitler için işlem yapar. Örndeğin AFR9 için işlem yapmak istersek AFRH
+		// registerini kullanmak gerekir. AFRH ise AFR[1]'de idi. Yani AFR9 için AFR[1] kullanmak gerekir.
+		// 1. Register üzerinde işlem yapmıyoruz, geçici bir değişken oluşturduk. 
+			// AFR[position >> 3U] = AFR[pinNumber / 8] 
+			// Neden 8'e böldük ? Çünkü AFRL(0-7) ve AFRH(8-15) 8 adet register tutuyor. Diyelim ki kullanıcı AFR6'da işlem yapmak istesin.
+			// AFR[ 6 / 8 ] = AFR[ 0 ], peki AFR[0]'da ne vardı -> AFRL. 
+			// Demekki AFR6 için AFRL'de işlem yapamk gerekir, peki ARFL nerede -> AFR[0] 
+			// ** Bir sayıyı 8'e bölmek (2^3) bitsel olarak sayısı 3 bit sağa kaydırmak demektir. 16'ya bölmek 4 bit, 64'e bölmek 6 bit sağa...
+		// 2. Güvenlik amaçlı önce ilgili bitleri temizliyoruz. 
+			// 0xFU : AFR registeri 4 bit değer alacağından dolayı 4 biti 1 olan sayı ile tersliyoruz.(0x00001111U = 0xFU)
+			// Eğer ilgili register 3 bit değer alsaydı 3 biti 1 olan sayı ile terslerdik. Yani 0x7U (0x0000111 = 0x7U)
+			// position & 0x7U : 8'e göre mod aldık. (2^3 = 8).Buradan 3'ü çekiyoruz ve 3 biti 1 olan sayi ile & işlemi yapıyoruz. 
+			// ((position & 0x7U) * 4)) ise mod sonucunu 4 ile çarpıp ilgili registeri buluyoruz. 
+			// Neden 4 ile çarpıypruz ? Çünkü bir bir register 4 bit değer alıyor. (0101, 1111 gibi...)
+				// Örnekle izah edelim. AFR15'e ulaşmak için -->
+				// 1. AFR[15 / 8] = AFR[1] yani ARF15 için AFRH(AFR[1])'a ulaşmak gerekir.
+				// 2. Peki AFR15 AFR[1]'in hangi pininden itiabren başlıyor ? 
+				// (15 % 8) = 7
+				// 7 x 4 = 28 (Başlangıç Biti 28)
+				// Demek ki AFR15, AFR[1]'de ve 28. pinde başlıyor. (AFRH15 = 28 29 30 31)
+				// Örnek 2: AFR3 için -->
+				// 1. AFR[3 / 8] = AFR[0] (AFRL)
+				// 2. (3 % 8) = 3, 3 x 4 = 12 (Başlangıç Biti 12)
+				// AFRL3 = 12 13 14 15 
+		// 3. Kullanıcının girdiği değeri, ilgili bit kadar kaydırarak işlem yaptığımız değişkene atadık. (tempValue = GPIO_AF7 gibi)
+		// 4. Altenate Function için tüm konfigürasyonlar hazır ve AFR registeri bu konfigürasyon ayarlarına göre çalışabilir.
+		// ÖZETLERSEK 
+		// AFR[0~1] için 8'e böldük, ilgili bitleri bulmak için 8'e göre mod alıp 4 ile çarptık. Bitleri temizledik ve kullanıcıdan 
+		// verileri aldık. Konfigürasyon ayarları bitince bu işlemleri geçici değişkenden ilgili registere ilettik.
+		}
+	}
+}
+```
 
 ### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)               
 ### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                 
 ### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)                
 ### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
 ### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
-
-
-
-
-
-
-
-
-
