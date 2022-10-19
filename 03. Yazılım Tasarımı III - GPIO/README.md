@@ -20,11 +20,10 @@ olarak ayarlar.
 Modlar: No pull-up, pull-down - Pull up - Pull Down 
 
 **5. GPIOx_IDR**            
-GPIO port input data register - Bu bitler salt okunurdur(read only). Karşılık gelen G/Ç bağlantı noktasının giriş değerini 
-içerirler.
+GPIO port input data register - Bu register ile ilgili porttan veri okuyoruz.                       
 
 **6. GPIOx_ODR**              
-GPIO port output data register - Bu bitler yazılım tarafından okunabilir ve yazılabilir(read or write).
+GPIO port output data register - Bu register ile port çıkışına veri aktarıyoruz.               
 
 **7. GPIOx_BSRR**                   
 GPIO port bit set/reset register - Bir biti set veya reset yapar.                          
@@ -214,9 +213,44 @@ void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pi
 }
 ```
 
+### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber) 
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                         
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                             
+
+```c
+GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)
+{
+	// IDR: GPIO port input data register - Bu register ile ilgili porttan veri okuyoruz. 
+	
+	GPIO_PinState_t bitStatus = GPIO_PIN_RESET;
+	
+	if((GPIOx->IDR & pinNumber) != GPIO_PIN_RESET)
+	{
+		bitStatus = GPIO_PIN_SET;
+	}
+	else
+	{
+		bitStatus = GPIO_PIN_RESET;
+	}
+	return bitStatus;
+	// Verimizi tutacak,ilk değeri 0 olan bir değişken oluşturuyoruz.
+	// (GPIOx->IDR & pinNumber) ifadesi sadece ilgili bitteki veriyi okur. 
+		// Örneğin IDR registerinde 0001 1001 1100 0010 verisi olsun ve ben 7. bitte veri var mı okumak istiyorum. O halde
+		// IDR -> 		(0001 1001 1100 0010) 
+		// 7. bit -> 		(0000 0000 1000 0000)
+		// IDR & GPIO_PIN_7	(0000 0000 1000 0000) <- İlgili pindeki okunacak veri
+	// (...!= GPIO_PIN_RESET ) veri var mı ? Var ise okumam için SET et(bitStatus = GPIO_PIN_SET) geri döndür( return bitStatus ). 
+}
+```
 
 
 
-### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)                
+
+
+
+
+
+
+
 ### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
 ### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
