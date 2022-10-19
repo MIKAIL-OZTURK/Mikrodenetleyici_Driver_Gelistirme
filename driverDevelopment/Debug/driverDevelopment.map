@@ -57,6 +57,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc ./Src/USART_Test.o
  .group         0x0000000000000000        0xc ./Src/USART_Test.o
  .group         0x0000000000000000        0xc ./Src/USART_Test.o
+ .group         0x0000000000000000        0xc ./Src/USART_Test.o
  .text          0x0000000000000000        0x0 ./Src/USART_Test.o
  .data          0x0000000000000000        0x0 ./Src/USART_Test.o
  .bss           0x0000000000000000        0x0 ./Src/USART_Test.o
@@ -285,6 +286,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc ./myDrivers/Src/EXTI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/EXTI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/EXTI.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/EXTI.o
  .text          0x0000000000000000        0x0 ./myDrivers/Src/EXTI.o
  .data          0x0000000000000000        0x0 ./myDrivers/Src/EXTI.o
  .bss           0x0000000000000000        0x0 ./myDrivers/Src/EXTI.o
@@ -316,11 +318,13 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/EXTI.o
  .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/EXTI.o
  .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/EXTI.o
- .debug_macro   0x0000000000000000      0x2cf ./myDrivers/Src/EXTI.o
- .debug_macro   0x0000000000000000       0x7c ./myDrivers/Src/EXTI.o
- .debug_macro   0x0000000000000000      0x11e ./myDrivers/Src/EXTI.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/EXTI.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/EXTI.o
+ .debug_macro   0x0000000000000000      0x124 ./myDrivers/Src/EXTI.o
  .debug_macro   0x0000000000000000       0x9a ./myDrivers/Src/EXTI.o
  .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/EXTI.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/EXTI.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/GPIO.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/GPIO.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/GPIO.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/GPIO.o
@@ -354,14 +358,14 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./myDrivers/Src/GPIO.o
  .data          0x0000000000000000        0x0 ./myDrivers/Src/GPIO.o
  .bss           0x0000000000000000        0x0 ./myDrivers/Src/GPIO.o
+ .text.GPIO_ReadPin
+                0x0000000000000000       0x32 ./myDrivers/Src/GPIO.o
  .text.GPIO_WritePin
                 0x0000000000000000       0x32 ./myDrivers/Src/GPIO.o
- .text.GPIO_ReadPin
-                0x0000000000000000       0x2c ./myDrivers/Src/GPIO.o
- .text.GPIO_LockPin
-                0x0000000000000000       0x36 ./myDrivers/Src/GPIO.o
  .text.GPIO_TogglePin
                 0x0000000000000000       0x32 ./myDrivers/Src/GPIO.o
+ .text.GPIO_LockPin
+                0x0000000000000000       0x36 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000      0xa78 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x22 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x8e ./myDrivers/Src/GPIO.o
@@ -386,11 +390,94 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/GPIO.o
- .debug_macro   0x0000000000000000      0x2cf ./myDrivers/Src/GPIO.o
- .debug_macro   0x0000000000000000       0x7c ./myDrivers/Src/GPIO.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/GPIO.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0xb8 ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x9a ./myDrivers/Src/GPIO.o
  .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/GPIO.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/GPIO.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/I2C.o
+ .text          0x0000000000000000        0x0 ./myDrivers/Src/I2C.o
+ .data          0x0000000000000000        0x0 ./myDrivers/Src/I2C.o
+ .bss           0x0000000000000000        0x0 ./myDrivers/Src/I2C.o
+ .text.I2C_Init
+                0x0000000000000000       0xd8 ./myDrivers/Src/I2C.o
+ .text.I2C_PeriphCmd
+                0x0000000000000000       0x36 ./myDrivers/Src/I2C.o
+ .debug_info    0x0000000000000000      0x28d ./myDrivers/Src/I2C.o
+ .debug_abbrev  0x0000000000000000      0x108 ./myDrivers/Src/I2C.o
+ .debug_aranges
+                0x0000000000000000       0x28 ./myDrivers/Src/I2C.o
+ .debug_ranges  0x0000000000000000       0x18 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x199 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0xa78 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x22 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x8e ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x51 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x103 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x6a ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x1df ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x52 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x18 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x3c ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x34 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x174 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x16 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x43 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x34 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x71 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x1c ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x12a ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x341 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000      0x124 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0xb8 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x9a ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/I2C.o
+ .debug_macro   0x0000000000000000       0x52 ./myDrivers/Src/I2C.o
+ .debug_line    0x0000000000000000      0x61c ./myDrivers/Src/I2C.o
+ .debug_str     0x0000000000000000     0xa132 ./myDrivers/Src/I2C.o
+ .comment       0x0000000000000000       0x51 ./myDrivers/Src/I2C.o
+ .debug_frame   0x0000000000000000       0x5c ./myDrivers/Src/I2C.o
+ .ARM.attributes
+                0x0000000000000000       0x2e ./myDrivers/Src/I2C.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/RCC.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/RCC.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/RCC.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/RCC.o
@@ -448,12 +535,14 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/RCC.o
  .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/RCC.o
  .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/RCC.o
- .debug_macro   0x0000000000000000      0x2cf ./myDrivers/Src/RCC.o
- .debug_macro   0x0000000000000000      0x118 ./myDrivers/Src/RCC.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/RCC.o
+ .debug_macro   0x0000000000000000      0x11e ./myDrivers/Src/RCC.o
  .debug_macro   0x0000000000000000       0xb8 ./myDrivers/Src/RCC.o
  .debug_macro   0x0000000000000000       0x9a ./myDrivers/Src/RCC.o
  .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/RCC.o
- .debug_macro   0x0000000000000000       0x7c ./myDrivers/Src/RCC.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/RCC.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/RCC.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/SPI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/SPI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/SPI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/SPI.o
@@ -520,7 +609,7 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x88 ./myDrivers/Src/SPI.o
  .debug_ranges  0x0000000000000000       0x78 ./myDrivers/Src/SPI.o
- .debug_macro   0x0000000000000000      0x18f ./myDrivers/Src/SPI.o
+ .debug_macro   0x0000000000000000      0x199 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000      0xa78 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x22 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x8e ./myDrivers/Src/SPI.o
@@ -545,18 +634,20 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/SPI.o
- .debug_macro   0x0000000000000000      0x2cf ./myDrivers/Src/SPI.o
- .debug_macro   0x0000000000000000       0x7c ./myDrivers/Src/SPI.o
- .debug_macro   0x0000000000000000      0x11e ./myDrivers/Src/SPI.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/SPI.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/SPI.o
+ .debug_macro   0x0000000000000000      0x124 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0xb8 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/SPI.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x94 ./myDrivers/Src/SPI.o
- .debug_line    0x0000000000000000      0x8d0 ./myDrivers/Src/SPI.o
- .debug_str     0x0000000000000000     0x9c1c ./myDrivers/Src/SPI.o
+ .debug_line    0x0000000000000000      0x8d9 ./myDrivers/Src/SPI.o
+ .debug_str     0x0000000000000000     0xa355 ./myDrivers/Src/SPI.o
  .comment       0x0000000000000000       0x51 ./myDrivers/Src/SPI.o
  .debug_frame   0x0000000000000000      0x22c ./myDrivers/Src/SPI.o
  .ARM.attributes
                 0x0000000000000000       0x2e ./myDrivers/Src/SPI.o
+ .group         0x0000000000000000        0xc ./myDrivers/Src/USART.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/USART.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/USART.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/USART.o
@@ -626,11 +717,12 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x10 ./myDrivers/Src/USART.o
  .debug_macro   0x0000000000000000       0x35 ./myDrivers/Src/USART.o
  .debug_macro   0x0000000000000000       0x20 ./myDrivers/Src/USART.o
- .debug_macro   0x0000000000000000      0x2cf ./myDrivers/Src/USART.o
- .debug_macro   0x0000000000000000       0x7c ./myDrivers/Src/USART.o
- .debug_macro   0x0000000000000000      0x11e ./myDrivers/Src/USART.o
+ .debug_macro   0x0000000000000000      0x32a ./myDrivers/Src/USART.o
+ .debug_macro   0x0000000000000000       0xa0 ./myDrivers/Src/USART.o
+ .debug_macro   0x0000000000000000      0x124 ./myDrivers/Src/USART.o
  .debug_macro   0x0000000000000000       0xb8 ./myDrivers/Src/USART.o
  .debug_macro   0x0000000000000000       0x9a ./myDrivers/Src/USART.o
+ .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/USART.o
  .text          0x0000000000000000        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-errno.o)
@@ -698,6 +790,7 @@ LOAD ./Src/sysmem.o
 LOAD ./Startup/startup_stm32f407vgtx.o
 LOAD ./myDrivers/Src/EXTI.o
 LOAD ./myDrivers/Src/GPIO.o
+LOAD ./myDrivers/Src/I2C.o
 LOAD ./myDrivers/Src/RCC.o
 LOAD ./myDrivers/Src/SPI.o
 LOAD ./myDrivers/Src/USART.o
@@ -732,7 +825,7 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
                 0x0000000008000000                g_pfnVectors
                 0x00000000080001a8                . = ALIGN (0x4)
 
-.text           0x00000000080001a8      0x870
+.text           0x00000000080001a8      0x874
                 0x00000000080001a8                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000080001a8       0x40 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
@@ -849,123 +942,123 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
                 0x0000000008000376       0x66 ./myDrivers/Src/EXTI.o
                 0x0000000008000376                NVIC_EnableInterrupt
  .text.GPIO_Init
-                0x00000000080003dc      0x16c ./myDrivers/Src/GPIO.o
+                0x00000000080003dc      0x170 ./myDrivers/Src/GPIO.o
                 0x00000000080003dc                GPIO_Init
  .text.RCC_GetSystemClock
-                0x0000000008000548       0x50 ./myDrivers/Src/RCC.o
-                0x0000000008000548                RCC_GetSystemClock
+                0x000000000800054c       0x50 ./myDrivers/Src/RCC.o
+                0x000000000800054c                RCC_GetSystemClock
  .text.RCC_GetHClock
-                0x0000000008000598       0x50 ./myDrivers/Src/RCC.o
-                0x0000000008000598                RCC_GetHClock
+                0x000000000800059c       0x50 ./myDrivers/Src/RCC.o
+                0x000000000800059c                RCC_GetHClock
  .text.RCC_GetPClock1
-                0x00000000080005e8       0x50 ./myDrivers/Src/RCC.o
-                0x00000000080005e8                RCC_GetPClock1
+                0x00000000080005ec       0x50 ./myDrivers/Src/RCC.o
+                0x00000000080005ec                RCC_GetPClock1
  .text.RCC_GetPClock2
-                0x0000000008000638       0x50 ./myDrivers/Src/RCC.o
-                0x0000000008000638                RCC_GetPClock2
+                0x000000000800063c       0x50 ./myDrivers/Src/RCC.o
+                0x000000000800063c                RCC_GetPClock2
  .text.closeUSART_ISR_Tx
-                0x0000000008000688       0x36 ./myDrivers/Src/USART.o
+                0x000000000800068c       0x36 ./myDrivers/Src/USART.o
  .text.USART_SendWith_IT
-                0x00000000080006be       0x80 ./myDrivers/Src/USART.o
- *fill*         0x000000000800073e        0x2 
+                0x00000000080006c2       0x80 ./myDrivers/Src/USART.o
+ *fill*         0x0000000008000742        0x2 
  .text.USART_Init
-                0x0000000008000740      0x16c ./myDrivers/Src/USART.o
-                0x0000000008000740                USART_Init
+                0x0000000008000744      0x16c ./myDrivers/Src/USART.o
+                0x0000000008000744                USART_Init
  .text.USART_TransmitData_IT
-                0x00000000080008ac       0x4c ./myDrivers/Src/USART.o
-                0x00000000080008ac                USART_TransmitData_IT
+                0x00000000080008b0       0x4c ./myDrivers/Src/USART.o
+                0x00000000080008b0                USART_TransmitData_IT
  .text.USART_PeriphCmd
-                0x00000000080008f8       0x3e ./myDrivers/Src/USART.o
-                0x00000000080008f8                USART_PeriphCmd
+                0x00000000080008fc       0x3e ./myDrivers/Src/USART.o
+                0x00000000080008fc                USART_PeriphCmd
  .text.USART_InterruptHandler
-                0x0000000008000936       0x80 ./myDrivers/Src/USART.o
-                0x0000000008000936                USART_InterruptHandler
- *fill*         0x00000000080009b6        0x2 
+                0x000000000800093a       0x80 ./myDrivers/Src/USART.o
+                0x000000000800093a                USART_InterruptHandler
+ *fill*         0x00000000080009ba        0x2 
  .text.__libc_init_array
-                0x00000000080009b8       0x48 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-init.o)
-                0x00000000080009b8                __libc_init_array
+                0x00000000080009bc       0x48 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-init.o)
+                0x00000000080009bc                __libc_init_array
  *(.glue_7)
- .glue_7        0x0000000008000a00        0x0 linker stubs
+ .glue_7        0x0000000008000a04        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008000a00        0x0 linker stubs
+ .glue_7t       0x0000000008000a04        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0000000008000a00        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .eh_frame      0x0000000008000a04        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
  *(.init)
- .init          0x0000000008000a00        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
-                0x0000000008000a00                _init
- .init          0x0000000008000a04        0x8 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ .init          0x0000000008000a04        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x0000000008000a04                _init
+ .init          0x0000000008000a08        0x8 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
  *(.fini)
- .fini          0x0000000008000a0c        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
-                0x0000000008000a0c                _fini
- .fini          0x0000000008000a10        0x8 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
-                0x0000000008000a18                . = ALIGN (0x4)
-                0x0000000008000a18                _etext = .
+ .fini          0x0000000008000a10        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x0000000008000a10                _fini
+ .fini          0x0000000008000a14        0x8 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x0000000008000a1c                . = ALIGN (0x4)
+                0x0000000008000a1c                _etext = .
 
-.vfp11_veneer   0x0000000008000a18        0x0
- .vfp11_veneer  0x0000000008000a18        0x0 linker stubs
+.vfp11_veneer   0x0000000008000a1c        0x0
+ .vfp11_veneer  0x0000000008000a1c        0x0 linker stubs
 
-.v4_bx          0x0000000008000a18        0x0
- .v4_bx         0x0000000008000a18        0x0 linker stubs
+.v4_bx          0x0000000008000a1c        0x0
+ .v4_bx         0x0000000008000a1c        0x0 linker stubs
 
-.iplt           0x0000000008000a18        0x0
- .iplt          0x0000000008000a18        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+.iplt           0x0000000008000a1c        0x0
+ .iplt          0x0000000008000a1c        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
 
-.rodata         0x0000000008000a18       0x2c
-                0x0000000008000a18                . = ALIGN (0x4)
+.rodata         0x0000000008000a1c       0x2c
+                0x0000000008000a1c                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x0000000008000a18       0x12 ./Src/USART_Test.o
+ .rodata        0x0000000008000a1c       0x12 ./Src/USART_Test.o
  *(.rodata*)
- *fill*         0x0000000008000a2a        0x2 
+ *fill*         0x0000000008000a2e        0x2 
  .rodata.AHB_Prescalers
-                0x0000000008000a2c       0x10 ./myDrivers/Src/RCC.o
-                0x0000000008000a2c                AHB_Prescalers
+                0x0000000008000a30       0x10 ./myDrivers/Src/RCC.o
+                0x0000000008000a30                AHB_Prescalers
  .rodata.APB_Prescalers
-                0x0000000008000a3c        0x8 ./myDrivers/Src/RCC.o
-                0x0000000008000a3c                APB_Prescalers
-                0x0000000008000a44                . = ALIGN (0x4)
+                0x0000000008000a40        0x8 ./myDrivers/Src/RCC.o
+                0x0000000008000a40                APB_Prescalers
+                0x0000000008000a48                . = ALIGN (0x4)
 
-.rel.dyn        0x0000000008000a44        0x0
- .rel.iplt      0x0000000008000a44        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+.rel.dyn        0x0000000008000a48        0x0
+ .rel.iplt      0x0000000008000a48        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
 
-.ARM.extab      0x0000000008000a44        0x0
-                0x0000000008000a44                . = ALIGN (0x4)
+.ARM.extab      0x0000000008000a48        0x0
+                0x0000000008000a48                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000008000a44                . = ALIGN (0x4)
+                0x0000000008000a48                . = ALIGN (0x4)
 
-.ARM            0x0000000008000a44        0x0
-                0x0000000008000a44                . = ALIGN (0x4)
-                0x0000000008000a44                __exidx_start = .
+.ARM            0x0000000008000a48        0x0
+                0x0000000008000a48                . = ALIGN (0x4)
+                0x0000000008000a48                __exidx_start = .
  *(.ARM.exidx*)
-                0x0000000008000a44                __exidx_end = .
-                0x0000000008000a44                . = ALIGN (0x4)
+                0x0000000008000a48                __exidx_end = .
+                0x0000000008000a48                . = ALIGN (0x4)
 
-.preinit_array  0x0000000008000a44        0x0
-                0x0000000008000a44                . = ALIGN (0x4)
-                0x0000000008000a44                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0000000008000a48        0x0
+                0x0000000008000a48                . = ALIGN (0x4)
+                0x0000000008000a48                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x0000000008000a44                PROVIDE (__preinit_array_end = .)
-                0x0000000008000a44                . = ALIGN (0x4)
+                0x0000000008000a48                PROVIDE (__preinit_array_end = .)
+                0x0000000008000a48                . = ALIGN (0x4)
 
-.init_array     0x0000000008000a44        0x4
-                0x0000000008000a44                . = ALIGN (0x4)
-                0x0000000008000a44                PROVIDE (__init_array_start = .)
+.init_array     0x0000000008000a48        0x4
+                0x0000000008000a48                . = ALIGN (0x4)
+                0x0000000008000a48                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x0000000008000a44        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
-                0x0000000008000a48                PROVIDE (__init_array_end = .)
-                0x0000000008000a48                . = ALIGN (0x4)
+ .init_array    0x0000000008000a48        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x0000000008000a4c                PROVIDE (__init_array_end = .)
+                0x0000000008000a4c                . = ALIGN (0x4)
 
-.fini_array     0x0000000008000a48        0x4
-                0x0000000008000a48                . = ALIGN (0x4)
+.fini_array     0x0000000008000a4c        0x4
+                0x0000000008000a4c                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0000000008000a48        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .fini_array    0x0000000008000a4c        0x4 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x0000000008000a4c                . = ALIGN (0x4)
-                0x0000000008000a4c                _sidata = LOADADDR (.data)
+                0x0000000008000a50                . = ALIGN (0x4)
+                0x0000000008000a50                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x0 load address 0x0000000008000a4c
+.data           0x0000000020000000        0x0 load address 0x0000000008000a50
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -974,12 +1067,12 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  *(.RamFunc*)
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _edata = .
-                0x0000000008000a4c                _siccmram = LOADADDR (.ccmram)
+                0x0000000008000a50                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x0000000020000000        0x0 load address 0x0000000008000a4c
+.igot.plt       0x0000000020000000        0x0 load address 0x0000000008000a50
  .igot.plt      0x0000000020000000        0x0 c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
 
-.ccmram         0x0000000010000000        0x0 load address 0x0000000008000a4c
+.ccmram         0x0000000010000000        0x0 load address 0x0000000008000a50
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _sccmram = .
  *(.ccmram)
@@ -1053,21 +1146,21 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libm.a
 LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp\libgcc.a
 
-.debug_info     0x0000000000000000     0x17e3
+.debug_info     0x0000000000000000     0x17d9
  .debug_info    0x0000000000000000      0x704 ./Src/USART_Test.o
  .debug_info    0x0000000000000704       0x22 ./Startup/startup_stm32f407vgtx.o
  .debug_info    0x0000000000000726      0x2df ./myDrivers/Src/EXTI.o
- .debug_info    0x0000000000000a05      0x379 ./myDrivers/Src/GPIO.o
- .debug_info    0x0000000000000d7e      0x3f0 ./myDrivers/Src/RCC.o
- .debug_info    0x000000000000116e      0x675 ./myDrivers/Src/USART.o
+ .debug_info    0x0000000000000a05      0x36f ./myDrivers/Src/GPIO.o
+ .debug_info    0x0000000000000d74      0x3f0 ./myDrivers/Src/RCC.o
+ .debug_info    0x0000000000001164      0x675 ./myDrivers/Src/USART.o
 
-.debug_abbrev   0x0000000000000000      0x64c
+.debug_abbrev   0x0000000000000000      0x643
  .debug_abbrev  0x0000000000000000      0x17c ./Src/USART_Test.o
  .debug_abbrev  0x000000000000017c       0x12 ./Startup/startup_stm32f407vgtx.o
  .debug_abbrev  0x000000000000018e       0xe9 ./myDrivers/Src/EXTI.o
- .debug_abbrev  0x0000000000000277      0x110 ./myDrivers/Src/GPIO.o
- .debug_abbrev  0x0000000000000387       0xeb ./myDrivers/Src/RCC.o
- .debug_abbrev  0x0000000000000472      0x1da ./myDrivers/Src/USART.o
+ .debug_abbrev  0x0000000000000277      0x107 ./myDrivers/Src/GPIO.o
+ .debug_abbrev  0x000000000000037e       0xeb ./myDrivers/Src/RCC.o
+ .debug_abbrev  0x0000000000000469      0x1da ./myDrivers/Src/USART.o
 
 .debug_aranges  0x0000000000000000      0x180
  .debug_aranges
@@ -1091,67 +1184,68 @@ LOAD c:/st/stm32cubeide_1.10.1/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_ranges  0x0000000000000098       0x28 ./myDrivers/Src/RCC.o
  .debug_ranges  0x00000000000000c0       0x68 ./myDrivers/Src/USART.o
 
-.debug_macro    0x0000000000000000     0x27a9
- .debug_macro   0x0000000000000000      0x185 ./Src/USART_Test.o
- .debug_macro   0x0000000000000185      0xa78 ./Src/USART_Test.o
- .debug_macro   0x0000000000000bfd       0x22 ./Src/USART_Test.o
- .debug_macro   0x0000000000000c1f       0x8e ./Src/USART_Test.o
- .debug_macro   0x0000000000000cad       0x51 ./Src/USART_Test.o
- .debug_macro   0x0000000000000cfe      0x103 ./Src/USART_Test.o
- .debug_macro   0x0000000000000e01       0x6a ./Src/USART_Test.o
- .debug_macro   0x0000000000000e6b      0x1df ./Src/USART_Test.o
- .debug_macro   0x000000000000104a       0x52 ./Src/USART_Test.o
- .debug_macro   0x000000000000109c       0x18 ./Src/USART_Test.o
- .debug_macro   0x00000000000010b4       0x3c ./Src/USART_Test.o
- .debug_macro   0x00000000000010f0       0x34 ./Src/USART_Test.o
- .debug_macro   0x0000000000001124      0x174 ./Src/USART_Test.o
- .debug_macro   0x0000000000001298       0x16 ./Src/USART_Test.o
- .debug_macro   0x00000000000012ae       0x43 ./Src/USART_Test.o
- .debug_macro   0x00000000000012f1       0x34 ./Src/USART_Test.o
- .debug_macro   0x0000000000001325       0x10 ./Src/USART_Test.o
- .debug_macro   0x0000000000001335       0x58 ./Src/USART_Test.o
- .debug_macro   0x000000000000138d       0x71 ./Src/USART_Test.o
- .debug_macro   0x00000000000013fe       0x1c ./Src/USART_Test.o
- .debug_macro   0x000000000000141a      0x12a ./Src/USART_Test.o
- .debug_macro   0x0000000000001544      0x341 ./Src/USART_Test.o
- .debug_macro   0x0000000000001885       0x10 ./Src/USART_Test.o
- .debug_macro   0x0000000000001895       0x35 ./Src/USART_Test.o
- .debug_macro   0x00000000000018ca       0x20 ./Src/USART_Test.o
- .debug_macro   0x00000000000018ea      0x2cf ./Src/USART_Test.o
- .debug_macro   0x0000000000001bb9       0x7c ./Src/USART_Test.o
- .debug_macro   0x0000000000001c35      0x11e ./Src/USART_Test.o
- .debug_macro   0x0000000000001d53       0xb8 ./Src/USART_Test.o
- .debug_macro   0x0000000000001e0b       0x9a ./Src/USART_Test.o
- .debug_macro   0x0000000000001ea5       0x82 ./Src/USART_Test.o
- .debug_macro   0x0000000000001f27      0x18f ./myDrivers/Src/EXTI.o
- .debug_macro   0x00000000000020b6       0xb2 ./myDrivers/Src/EXTI.o
- .debug_macro   0x0000000000002168      0x18f ./myDrivers/Src/GPIO.o
- .debug_macro   0x00000000000022f7      0x118 ./myDrivers/Src/GPIO.o
- .debug_macro   0x000000000000240f      0x18f ./myDrivers/Src/RCC.o
- .debug_macro   0x000000000000259e      0x18f ./myDrivers/Src/USART.o
- .debug_macro   0x000000000000272d       0x7c ./myDrivers/Src/USART.o
+.debug_macro    0x0000000000000000     0x28be
+ .debug_macro   0x0000000000000000      0x18f ./Src/USART_Test.o
+ .debug_macro   0x000000000000018f      0xa78 ./Src/USART_Test.o
+ .debug_macro   0x0000000000000c07       0x22 ./Src/USART_Test.o
+ .debug_macro   0x0000000000000c29       0x8e ./Src/USART_Test.o
+ .debug_macro   0x0000000000000cb7       0x51 ./Src/USART_Test.o
+ .debug_macro   0x0000000000000d08      0x103 ./Src/USART_Test.o
+ .debug_macro   0x0000000000000e0b       0x6a ./Src/USART_Test.o
+ .debug_macro   0x0000000000000e75      0x1df ./Src/USART_Test.o
+ .debug_macro   0x0000000000001054       0x52 ./Src/USART_Test.o
+ .debug_macro   0x00000000000010a6       0x18 ./Src/USART_Test.o
+ .debug_macro   0x00000000000010be       0x3c ./Src/USART_Test.o
+ .debug_macro   0x00000000000010fa       0x34 ./Src/USART_Test.o
+ .debug_macro   0x000000000000112e      0x174 ./Src/USART_Test.o
+ .debug_macro   0x00000000000012a2       0x16 ./Src/USART_Test.o
+ .debug_macro   0x00000000000012b8       0x43 ./Src/USART_Test.o
+ .debug_macro   0x00000000000012fb       0x34 ./Src/USART_Test.o
+ .debug_macro   0x000000000000132f       0x10 ./Src/USART_Test.o
+ .debug_macro   0x000000000000133f       0x58 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001397       0x71 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001408       0x1c ./Src/USART_Test.o
+ .debug_macro   0x0000000000001424      0x12a ./Src/USART_Test.o
+ .debug_macro   0x000000000000154e      0x341 ./Src/USART_Test.o
+ .debug_macro   0x000000000000188f       0x10 ./Src/USART_Test.o
+ .debug_macro   0x000000000000189f       0x35 ./Src/USART_Test.o
+ .debug_macro   0x00000000000018d4       0x20 ./Src/USART_Test.o
+ .debug_macro   0x00000000000018f4      0x32a ./Src/USART_Test.o
+ .debug_macro   0x0000000000001c1e       0xa0 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001cbe      0x124 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001de2       0xb8 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001e9a       0x9a ./Src/USART_Test.o
+ .debug_macro   0x0000000000001f34       0x82 ./Src/USART_Test.o
+ .debug_macro   0x0000000000001fb6       0x58 ./Src/USART_Test.o
+ .debug_macro   0x000000000000200e      0x199 ./myDrivers/Src/EXTI.o
+ .debug_macro   0x00000000000021a7       0xb2 ./myDrivers/Src/EXTI.o
+ .debug_macro   0x0000000000002259      0x199 ./myDrivers/Src/GPIO.o
+ .debug_macro   0x00000000000023f2      0x11e ./myDrivers/Src/GPIO.o
+ .debug_macro   0x0000000000002510      0x199 ./myDrivers/Src/RCC.o
+ .debug_macro   0x00000000000026a9      0x199 ./myDrivers/Src/USART.o
+ .debug_macro   0x0000000000002842       0x7c ./myDrivers/Src/USART.o
 
-.debug_line     0x0000000000000000     0x24b9
- .debug_line    0x0000000000000000      0x609 ./Src/USART_Test.o
- .debug_line    0x0000000000000609       0x84 ./Startup/startup_stm32f407vgtx.o
- .debug_line    0x000000000000068d      0x6b6 ./myDrivers/Src/EXTI.o
- .debug_line    0x0000000000000d43      0x6fd ./myDrivers/Src/GPIO.o
- .debug_line    0x0000000000001440      0x65a ./myDrivers/Src/RCC.o
- .debug_line    0x0000000000001a9a      0xa1f ./myDrivers/Src/USART.o
+.debug_line     0x0000000000000000     0x24e8
+ .debug_line    0x0000000000000000      0x612 ./Src/USART_Test.o
+ .debug_line    0x0000000000000612       0x84 ./Startup/startup_stm32f407vgtx.o
+ .debug_line    0x0000000000000696      0x6bf ./myDrivers/Src/EXTI.o
+ .debug_line    0x0000000000000d55      0x708 ./myDrivers/Src/GPIO.o
+ .debug_line    0x000000000000145d      0x663 ./myDrivers/Src/RCC.o
+ .debug_line    0x0000000000001ac0      0xa28 ./myDrivers/Src/USART.o
 
-.debug_str      0x0000000000000000     0x9f8f
- .debug_str     0x0000000000000000     0x9acb ./Src/USART_Test.o
-                                       0x9cf3 (size before relaxing)
- .debug_str     0x0000000000009acb       0x31 ./Startup/startup_stm32f407vgtx.o
+.debug_str      0x0000000000000000     0xa6c8
+ .debug_str     0x0000000000000000     0xa204 ./Src/USART_Test.o
+                                       0xa42c (size before relaxing)
+ .debug_str     0x000000000000a204       0x31 ./Startup/startup_stm32f407vgtx.o
                                          0x85 (size before relaxing)
- .debug_str     0x0000000000009afc       0xed ./myDrivers/Src/EXTI.o
-                                       0x9a8f (size before relaxing)
- .debug_str     0x0000000000009be9       0xd9 ./myDrivers/Src/GPIO.o
-                                       0x9a35 (size before relaxing)
- .debug_str     0x0000000000009cc2       0xea ./myDrivers/Src/RCC.o
-                                       0x9ac7 (size before relaxing)
- .debug_str     0x0000000000009dac      0x1e3 ./myDrivers/Src/USART.o
-                                       0x9c78 (size before relaxing)
+ .debug_str     0x000000000000a235       0xed ./myDrivers/Src/EXTI.o
+                                       0xa1c8 (size before relaxing)
+ .debug_str     0x000000000000a322       0xd9 ./myDrivers/Src/GPIO.o
+                                       0xa16e (size before relaxing)
+ .debug_str     0x000000000000a3fb       0xea ./myDrivers/Src/RCC.o
+                                       0xa200 (size before relaxing)
+ .debug_str     0x000000000000a4e5      0x1e3 ./myDrivers/Src/USART.o
+                                       0xa3b1 (size before relaxing)
 
 .comment        0x0000000000000000       0x50
  .comment       0x0000000000000000       0x50 ./Src/USART_Test.o

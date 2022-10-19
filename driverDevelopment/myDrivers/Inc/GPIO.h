@@ -3,6 +3,8 @@
 
 #include "STM32F407xx.h"
 
+#define GPIO_MAX_PIN_NUMBER		((uint16_t)(16U))
+
 /* @def_gruop GPIO_Pins */
 #define GPIO_PIN_0			( (uint16_t)(0x0001) )	/*!< GPIO Pin 0 Selected */
 #define GPIO_PIN_1			( (uint16_t)(0x0002) )	/*!< GPIO Pin 1 Selected */
@@ -64,8 +66,8 @@
 
 typedef enum
 {
-	GPIO_Pin_Reset = 0x0U,
-	GPIO_Pin_Set = !(GPIO_Pin_Reset),
+	  GPIO_PIN_RESET = 0,
+	  GPIO_PIN_SET
 
 }GPIO_PinState_t;
 

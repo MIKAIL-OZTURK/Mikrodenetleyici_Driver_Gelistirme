@@ -64,6 +64,30 @@
 #define RCC_USART3_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_USART3EN  )
 
 
+#define RCC_I2C1_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
+											SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C1EN);					\
+											tempValue = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C1EN);		\
+											UNUSED(tempValue);											\
+										}while(0)
+#define RCC_I2C1_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_I2C1EN  )
+
+
+#define RCC_I2C2_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
+											SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C2EN);					\
+											tempValue = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C2EN);		\
+											UNUSED(tempValue);											\
+										}while(0)
+#define RCC_I2C2_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_I2C2EN  )
+
+#define RCC_I2C3_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
+											SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);					\
+											tempValue = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);		\
+											UNUSED(tempValue);											\
+										}while(0)
+#define RCC_I2C3_CLK_DISABLE()			CLEAR_BIT( RCC->APB1ENR, RCC_APB1ENR_I2C3EN  )
+
+
+
 /* RCC APB2 Peripherals Clock Control Macro Definitions */
 #define RCC_SYSCFG_CLK_ENABLE()		  do{	uint32_t tempValue = 0;										\
 											SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SYSCFG);					\

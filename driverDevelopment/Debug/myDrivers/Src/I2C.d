@@ -1,5 +1,5 @@
-myDrivers/Src/RCC.o: ../myDrivers/Src/RCC.c \
- C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/RCC.h \
+myDrivers/Src/I2C.o: ../myDrivers/Src/I2C.c \
+ C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/I2C.h \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/STM32F407xx.h \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/RCC.h \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/GPIO.h \
@@ -7,7 +7,7 @@ myDrivers/Src/RCC.o: ../myDrivers/Src/RCC.c \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/SPI.h \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/USART.h \
  C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/I2C.h
-C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/RCC.h:
+C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/I2C.h:
 C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/STM32F407xx.h:
 C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/RCC.h:
 C:/Users/IIIIIIIIIIIIIIIIIIII/STM32CubeIDE/workspace_1.10.1/driverDevelopment/myDrivers/Inc/GPIO.h:

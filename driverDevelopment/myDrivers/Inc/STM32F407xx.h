@@ -178,6 +178,23 @@ typedef struct
 
 }USART_TypeDef_t;
 
+typedef struct
+{
+	__IO uint32_t CR1;						/*!< I2C Control register 1						Address Offset = 0x00 */
+	__IO uint32_t CR2;						/*!< I2C control register 2						Address Offset = 0x04 */
+	__IO uint32_t OAR1;						/*!< I2C Own address register 1					Address Offset = 0x08 */
+	__IO uint32_t OAR2;						/*!< I2C Own address register 2					Address Offset = 0x0C */
+	__IO uint32_t DR;						/*!< I2C Data register							Address Offset = 0x10 */
+	__IO uint32_t SR1;						/*!< I2C Status register 1						Address Offset = 0x14 */
+	__IO uint32_t SR2;						/*!< I2C Status register 2						Address Offset = 0x18 */
+	__IO uint32_t CCR;						/*!< I2C clock control register					Address Offset = 0x1C */
+	__IO uint32_t TRISE;					/*!< I2C TRISE register							Address Offset = 0x20 */
+	__IO uint32_t FLTR;						/*!< I2C FLTR register							Address Offset = 0x24 */
+
+}I2C_TypeDef_t;
+
+
+
 
 /* Base Address definitions of ports */
 #define GPIOA								( (GPIO_TypeDef_t *	)(GPIOA_BASE_ADDR)	)
@@ -186,7 +203,7 @@ typedef struct
 #define GPIOD								( (GPIO_TypeDef_t *	)(GPIOD_BASE_ADDR)	)
 #define GPIOE								( (GPIO_TypeDef_t *	)(GPIOE_BASE_ADDR)	)
 #define RCC									( (RCC_TypeDef_t  *	)(RCC_BASE_ADDR)	)
-#define SYSCFG								( (SYSCFG_TypeDef_t *)(SYSCFG_BASE_ADDR))
+#define SYSCFG								( (SYSCFG_TypeDef_t*)(SYSCFG_BASE_ADDR) )
 #define EXTI								( (EXTI_TypeDef_t * )(EXTI_BASE_ADDR)	)
 #define SPI1								( (SPI_TypeDef_t *	)(SPI1_BASE_ADDR)	)
 #define SPI2								( (SPI_TypeDef_t *	)(SPI2_BASE_ADDR)	)
@@ -197,6 +214,10 @@ typedef struct
 #define UART4								( (USART_TypeDef_t *)(UART4_BASE_ADDR)	)
 #define UART5								( (USART_TypeDef_t *)(UART5_BASE_ADDR)	)
 #define USART6 								( (USART_TypeDef_t *)(USART6_BASE_ADDR)	)
+#define I2C1								( (I2C_TypeDef_t   *)(I2C1_BASE_ADDR)	)
+#define I2C2								( (I2C_TypeDef_t   *)(I2C2_BASE_ADDR)	)
+#define I2C3								( (I2C_TypeDef_t   *)(I2C3_BASE_ADDR)	)
+
 
 /* Bit Definition */
 #define RCC_AHB1ENR_GPIOAEN_Pos				(0U)										/*!< RCC AHB1ENR register GPIOAEN Bit Position  */
@@ -223,6 +244,15 @@ typedef struct
 #define RCC_APB1ENR_USART3EN_Pos			(18U)										/*!< RCC APB1ENR register USART3 Bit Position 	*/
 #define RCC_APB1ENR_USART3EN_Msk			(0x1 << RCC_APB1ENR_USART3_Pos)				/*!< RCC APB1ENR register USART3 Bit Mask 		*/
 #define RCC_APB1ENR_USART3EN				RCC_APB1ENR_USART3EN_Msk					/*!< RCC APB1ENR register USART3 Macro	 		*/
+#define RCC_APB1ENR_I2C1EN_Pos				(21U)										/*!< RCC APB1ENR register I2C1 Bit Position		*/
+#define RCC_APB1NER_I2C1EN_Msk				(0x1 << RCC_APB1ENR_I2C1EN_Pos) 			/*!< RCC APB1ENR register I2C1 Bit Mask			*/
+#define RCC_APB1ENR_I2C1EN					RCC_APB1NER_I2C1EN_Msk						/*!< RCC APB1ENR register I2C1 Macro			*/
+#define RCC_APB1ENR_I2C2EN_Pos				(22U)										/*!< RCC APB1ENR register I2C2 Bit Position		*/
+#define RCC_APB1NER_I2C2EN_Msk				(0x1 << RCC_APB1ENR_I2C2EN_Pos) 			/*!< RCC APB1ENR register I2C2 Bit Mask			*/
+#define RCC_APB1ENR_I2C2EN					RCC_APB1NER_I2C2EN_Msk						/*!< RCC APB1ENR register I2C2 Macro			*/
+#define RCC_APB1ENR_I2C3EN_Pos				(23U)										/*!< RCC APB1ENR register I2C3 Bit Position		*/
+#define RCC_APB1NER_I2C3EN_Msk				(0x1 << RCC_APB1ENR_I2C3EN_Pos) 			/*!< RCC APB1ENR register I2C3 Bit Mask			*/
+#define RCC_APB1ENR_I2C3EN					RCC_APB1NER_I2C3EN_Msk						/*!< RCC APB1ENR register I2C3 Macro			*/
 #define RCC_APB2ENR_SYSCFG_Pos				(14U)										/*!< RCC APB2ENR register SSYCFG Bit Position 	*/
 #define RCC_APB2ENR_SYSCFG_Msk				(0x1 << RCC_APB2ENR_SYSCFG_Pos)				/*!< RCC APB2ENR register SSYCFG Bit Mask 		*/
 #define RCC_APB2ENR_SYSCFG					RCC_APB2ENR_SYSCFG_Msk						/*!< RCC APB2ENR register SSYCFG Macro 			*/
@@ -244,6 +274,7 @@ typedef struct
 #define USART_SR_TxE						(7U)
 #define USART_SR_TC							(6U)
 #define USART_SR_RxNE						(5U)
+#define I2C_CR1_PE							(0U)
 
 /* Flag Definitions */
 #define SPI_TxE_FLAG						(0x1U << SPI_SR_TxE)
@@ -258,5 +289,6 @@ typedef struct
 #include "EXTI.h"
 #include "SPI.h"
 #include "USART.h"
+#include "I2C.h"
 
 #endif /* INC_STM32F407XX_H_ */

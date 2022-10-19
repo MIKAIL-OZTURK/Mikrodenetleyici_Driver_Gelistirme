@@ -1,5 +1,7 @@
 #include "GPIO.h"
 
+
+
 /*
  * @brief	GPIO_Init, configures the port and pin
  *
@@ -11,18 +13,19 @@
 void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)
 {
 	uint32_t position;
-	uint32_t fakePosition = 0;
-	uint32_t lastPosition = 0;
+	uint32_t fakePosition = 0x00U;
+	uint32_t lastPosition = 0x00U;
+	uint32_t tempValue = 0x00U;
 
-	for(position = 0; position < 16; position++)
+	for(position = 0U; position < GPIO_MAX_PIN_NUMBER; position++)
 	{
 		fakePosition = (0x1U << position);
-		lastPosition = (uint32_t)(GPIO_ConfigStruct->pinNumber) & fakePosition;
+		lastPosition = ((uint32_t)(GPIO_ConfigStruct->pinNumber) & fakePosition);
 
 		if(fakePosition == lastPosition)
 		{
 			/* MODE CONFIG */
-			uint32_t tempValue = GPIOx->MODER;
+			tempValue = GPIOx->MODER;
 			tempValue &= ~(0x3U << (position * 2));
 			tempValue |= (GPIO_ConfigStruct->Mode << (position * 2));
 			GPIOx->MODER = tempValue;
@@ -60,27 +63,6 @@ void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)
 }
 
 
-/*
- * @brief	GPIO_WritePin, makes pin High or Low
- *
- * @param	GPIOx 		= GPIO Port Base Address
- * @param	pinNumber 	= GPIO Pin Numbers 0 - 15
- * @param	pinState 	= GPIO_Pin_Set or GPIO_Pin_Reset
- *
- * @retval	void
- */
-void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
-{
-	if(pinState == GPIO_Pin_Set)
-	{
-		GPIOx->BSRR = pinNumber;
-	}
-	else
-	{
-		GPIOx->BSRR = (pinNumber << 16U);
-	}
-}
-
 
 /*
  * @brief	GPIO_ReadPin, reads the pin of GPIOx Port
@@ -92,13 +74,58 @@ void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pi
  */
 GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)
 {
-	GPIO_PinState_t bitStatus = GPIO_Pin_Reset;
-	if((GPIOx->IDR & pinNumber) != GPIO_Pin_Reset)
+	GPIO_PinState_t bitStatus = GPIO_PIN_RESET;
+
+	if((GPIOx->IDR & pinNumber) != GPIO_PIN_RESET)
 	{
-		bitStatus = GPIO_Pin_Set;
+		bitStatus = GPIO_PIN_SET;
+	}
+	else
+	{
+		bitStatus = GPIO_PIN_RESET;
 	}
 	return bitStatus;
 }
+
+
+
+/*
+ * @brief	GPIO_WritePin, makes pin high or Low
+ *
+ * @param	GPIOx 		= GPIO Port Base Address
+ * @param	pinNumber 	= GPIO Pin Numbers 0 - 15
+ * @param	pinState 	= GPIO_Pin_Set or GPIO_Pin_Reset
+ *
+ * @retval	void
+ */
+void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
+{
+	if(pinState == GPIO_PIN_SET)
+	{
+		GPIOx->BSRR = pinNumber;
+	}
+	else
+	{
+		GPIOx->BSRR = (pinNumber << 16U);
+	}
+}
+
+
+
+/*
+ * @brief	GPIO_TogglePin, toggles the pin of GPIOx Port
+ *
+ * @param	GPIOx 		= GPIO Port Base Address
+ * @param	pinNumber 	= GPIO Pin Numbers 0 - 15
+ *
+ * @retval	void
+ */
+void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
+{
+	uint32_t tempODRRegister = GPIOx->ODR;
+	GPIOx->BSRR = ((tempODRRegister & pinNumber ) << 16U ) | (~tempODRRegister & pinNumber);
+}
+
 
 
 /*
@@ -116,19 +143,4 @@ void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
 	GPIOx->LCKR = pinNumber;
 	GPIOx->LCKR = tempValue;
 	tempValue = GPIOx->LCKR;
-}
-
-
-/*
- * @brief	GPIO_TogglePin, toggles the pin of GPIOx Port
- *
- * @param	GPIOx 		= GPIO Port Base Address
- * @param	pinNumber 	= GPIO Pin Numbers 0 - 15
- *
- * @retval	void
- */
-void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
-{
-	uint32_t tempODRRegister = GPIOx->ODR;
-	GPIOx->BSRR = ((tempODRRegister & pinNumber ) << 16U ) | (~tempODRRegister & pinNumber);
 }
