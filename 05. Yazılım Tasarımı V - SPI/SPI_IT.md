@@ -10,7 +10,7 @@
 Örneğin SPI_Transmit mi SPI_Receive mi burada karar verilir.    
 SPI1_IRQHandler() fonksiyonunda çağırılırlar. 
 
-### 3. USART_TransmitData_IT();
+### 3. SPI_TransmitData_IT();
 İnterrupt işleminin başladığı kısımdır. İşlem sırasında kullanılacak veriler global değişkenlere atanır ki tüm fonksiyonlar erişebilsin. Ardından interrupt'ı aktif hale getiriyoruz.
 Böylece interrupt başlatıldı ve veriler işlenmeye hazır.                  
 **INTERRUPT MODE -> ENABLE**                                                        
@@ -28,9 +28,9 @@ USART_TransmitData_IT() fonksiyonundan gelen verilerin ne iş yapacağına karar
 
 
 ## ÖZET
-### 1. USART2IRQ_Handler(); -> PROGRAMA INTERRUPT BİLDİRİMİ YAPILDI                     
-### 2. USART_InterruprtHandler(); -> INTERRUPT_MOD BELİRLENDİ             
-### 3. USART_TransmitData_IT(); -> INTERRUPT AKTİF, VERİLER HAZIR            
+### 1. SPI1_IRQHandler(); -> PROGRAMA INTERRUPT BİLDİRİMİ YAPILDI                     
+### 2. SPI_InterruptHandler(); -> INTERRUPT_MOD BELİRLENDİ             
+### 3. SPI_TransmitData_IT(); -> INTERRUPT AKTİF, VERİLER HAZIR            
 ### 4. SPI_TransmitHelper_8Bits(); -> VERİLER İŞLENİYOR...                 
 ### 5. SPI_CloseISR_TX(); -> VERİLER SIFIRLANDI, INTERRUPT PASİF                  
 
