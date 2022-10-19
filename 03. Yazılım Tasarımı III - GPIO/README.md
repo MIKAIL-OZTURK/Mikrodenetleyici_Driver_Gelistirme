@@ -20,10 +20,11 @@ olarak ayarlar.
 Modlar: No pull-up, pull-down - Pull up - Pull Down 
 
 **5. GPIOx_IDR**            
-GPIO port input data register - Bu register ile ilgili porttan veri okuyoruz.                       
+GPIO port input data register - Bu register ile ilgili porttan veri okuyoruz. (Read Only)                              
 
 **6. GPIOx_ODR**              
-GPIO port output data register - Bu register ile port çıkışına veri aktarıyoruz.               
+GPIO port output data register - Bu register ile port çıkışına veri aktarıyoruz. Pin çıktılarını ODR registerı aracılığı ile okuyabiliriz veya direk olarak bu 
+register değerini değiştirerek ayarlayabiliriz. (Read and Write)                                                 
 
 **7. GPIOx_BSRR**                   
 GPIO port bit set/reset register - Bir biti set veya reset yapar.                          
@@ -186,34 +187,9 @@ void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)
 	}
 }
 ```
-            
-### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                                  
-Bir pinin değerini SET veya RESET yapar. 
-***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                            
-***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                              
-***GPIO_PinState_t pinState*** - Pin durum bilgisi alır. (GPIO_PIN_SET veya GPIO_PIN_RESET)                                       
-
-```c
-void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
-{
-	//  BSRR: Bir biti set veya reset yapar. Kullanımı:     
-	//  0 - 15 Bitler için 		1 -> Set		0 -> İşlem Yok 
-	// 16 - 31 Bitler için 		1 -> Reset 		0 -> İşlem Yok
-	
-	if(pinState == GPIO_Pin_Set)
-	{
-		GPIOx->BSRR = pinNumber;
-	}
-	else
-	{
-		GPIOx->BSRR = (pinNumber << 16U);
-	}
-	// 0-15 bitlerini SET yapmak için ilgili bite 1 yazmak yeterli. (GPIOx->BSRR = pinNumber)
-	// Ancak RESET yapmak için 16 bit ötelemek gerekir. (GPIOx->BSRR = (pinNumber << 16U))
-}
-```
-
-### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber) 
+         
+### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)              
+Bir pinde veri okuma işlemi yapar.                        
 ***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                         
 ***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                             
 
@@ -243,14 +219,91 @@ GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)
 }
 ```
 
+### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                                  
+Bir pinin değerini SET veya RESET yapar. 
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                            
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                              
+***GPIO_PinState_t pinState*** - Pin durum bilgisi alır. (GPIO_PIN_SET veya GPIO_PIN_RESET)                                       
 
+```c
+void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
+{
+	//  BSRR: Bir biti set veya reset yapar. Kullanımı:     
+	//  0 - 15 Bitler için 		1 -> Set		0 -> İşlem Yok 
+	// 16 - 31 Bitler için 		1 -> Reset 		0 -> İşlem Yok
+	
+	if(pinState == GPIO_Pin_Set)
+	{
+		GPIOx->BSRR = pinNumber;
+	}
+	else
+	{
+		GPIOx->BSRR = (pinNumber << 16U);
+	}
+	// 0-15 bitlerini SET yapmak için ilgili bite 1 yazmak yeterli. (GPIOx->BSRR = pinNumber)
+	// Ancak RESET yapmak için 16 bit ötelemek gerekir. (GPIOx->BSRR = (pinNumber << 16U))
+}
+```
 
+### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                  
+Bir pinin durumunu değiştirir. SET ise RESET; RESET ise SET yapar.                           
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                            
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)   
+```c
+void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
+{
+	// ODR: Bu register ile port çıkışına veri aktarıyoruz.  
+	// BSRR: Bir biti set veya reset yapar. 
+	
+	uint32_t tempODRRegister = GPIOx->ODR;
+	GPIOx->BSRR = ((tempODRRegister & pinNumber ) << 16U ) | (~tempODRRegister & pinNumber);
+	// 1. MCU'nun çıkışındaki veriyi ODR registeri ile okuyoruz ve bunu geçici bir değişkene atıyoruz. 
+	// 2. Toggle işlemini gerçekleştiriyoruz -->
+		/*---------------------------- SET -> RESET ----------------------------*/ 
+		// GPIOx->BSRR = ((tempODRRegister & pinNumber ) << 16U ) -> Örneğin:
+			//  0000 1100 1110 1010 	(tempODRRegister)
+			//  0000 0000 0100 0000		(pinNumber = GPIO_PIN_6)
+			//  0000 0000 1000 0000		(pinNumber = GPIO_PIN_7)
+			//  0000 0000 1100 0000 	(tempODRRegister & pinNumber)
+			//  0000 0000 0000 0000		((tempODRRegister & pinNumber ) << 16U)
+				// BSRR registerinde 16 bit sola kaydırmak ilgili biti RESET'e çekmek demektir.
+		/*---------------------------- RESET -> SET ----------------------------*/ 
+		// GPIO->BSRR = (~tempODRRegister & pinNumber) -> Örneğin:
+			//  0000 1100 1110 1010 	(tempODRRegister)
+			//  1111 0011 0001 0101		(~tempODRRegister)
+			//  0001 0000 0000 0000 	(pinNumber = GPIO_PIN_12)
+			//  0001 0000 0000 0000 	(~tempODRRegister & pinNumber)
+	// 3. Elimizdeki veriyi toogle etmek için BSRR registerine atıyoruz. 
+}
+```
 
-
-
-
-
-
-
-### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
-### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
+### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)    
+Bir pini konfigürasyona kapatır ve kilitler. 
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                        
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                        
+```c
+void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
+{
+	// LCKR: Kilitleme işleminin yapıldığı registerdir. 
+	// Pinler: 0 - 15 -> Konfigüre Edilecek Pinler, 16 -> Anahtarın Bulunduğu Pin , 17 - 31 -> Rezerve Edilmiş Pinler
+	// Adım 1: 16. bite 1 yaz ve konfigüre edeceğin pine veri yaz. ( LCKR[16] = '1'  LCKR[15:0] = DATA )
+	// Adım 2: 16. bite 0 yaz ve konfigüre edeceğin pine veri yaz  ( LCKR[16] = '0'  LCKR[15:0] = DATA )            
+	// Adım 3: 16. bite 1 yaz ve konfigüre edeceğin pine veri yaz  ( LCKR[16] = '1'  LCKR[15:0] = DATA )              
+	// Adım 4: Okuma işlemi yap.                                   ( tempValue = GPIOx->LCKR           )
+	
+	uint32_t tempValue = (0x1 << 16U) | pinNumber;  // tempValue = ( LCKR[16] = '1'  LCKR[15:0] = DATA )
+	GPIOx->LCKR = tempValue;			// LCKR[16] = '1'  LCKR[15:0] = DATA 
+	GPIOx->LCKR = pinNumber;			// LCKR[16] = '0'  LCKR[15:0] = DATA  
+	GPIOx->LCKR = tempValue;			// LCKR[16] = '1'  LCKR[15:0] = DATA  
+	tempValue = GPIOx->LCKR;			// Okuma işlemi gerçekleştirilir
+	// 1. Kiltleme işlemini yapabilmek için önce 16.biti 1 yapıyoruz ve pinNumber aracılığı ile gelen veriyi 0-15. bitlere yazıyoruz. Yani:  
+		// tempValue = 1 0000 0000 1101 0000 gibi bir değer olsun
+		// 1 			-> LCKR[16] = '1'(Key)
+		// 0000 0000 1101 0000  -> LCKR[15:0] = DATA
+		// Yani kilitleme için 1.adımı direkt tempValue değişkenine atadık. 
+	// GPIOx->LCKR = tempValue; (Adım 1)
+	// GPIOx->LCKR = pinNumber; (Adım 2) çünkü pinNumber 0 0000 0000 1101 0000 değeri budur. 16. bite dokunmadığımzıdan 16. bit 0
+	// GPIOx->LCKR = tempValue; (Adım 3)
+	// Okuma İşlemi
+}
+```
