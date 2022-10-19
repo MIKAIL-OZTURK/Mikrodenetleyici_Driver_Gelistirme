@@ -1,13 +1,5 @@
 # GPIO (General Purpose Input Output)
 
-### GPIO.h
-1. Registerlerin Aldığı Değerlerin Tanımlanması
-2. Yapılar
-3. Fonksiyon Prototipleri ( API's )       
-### GPIO.c
-1. Fonksiyon Tanımlamaları ( API's )
-
----
 ## GPIO Registers 
 **1. GPIOx_MODER**
 GPIO port mode register - Bir pinin modunu belirlemek için kullanılır.         
@@ -67,13 +59,14 @@ için kullanılır.
 # API's                 
 
 ### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)                                            
-GPIO port ve pinlerini kondigüre eder. 
-GPIO_TypeDef_t *GPIOx - Port bilgisi alır. (GPIOA...GPIOK gibi)
-GPIO_InitTypeDef_t *GPIO_ConfigStruct - Konfigürasyon sağlayan yapının adresini alır. Örneğin:              
+GPIO port ve pinlerini kondigüre eder.                                   
+GPIO_TypeDef_t *GPIOx - Port bilgisi alır. (GPIOA...GPIOK gibi)                                   
+GPIO_InitTypeDef_t *GPIO_ConfigStruct - Konfigürasyon sağlayan yapının adresini alır. Örneğin:                               
+
 ```c
 static void GPIO_LedConfig()
 {
-	GPIO_InitTypeDef_t GPIO_LedStruct = { 0 };  // Konfigürasyon sağlayan yapı 
+	GPIO_InitTypeDef_t GPIO_LedStruct = { 0 };  	// Konfigürasyon sağlayan yapı 
 	RCC_GPIOD_CLK_ENABLE();		                  // Clock Enable for LED's 
 
 	// LED Configuration
