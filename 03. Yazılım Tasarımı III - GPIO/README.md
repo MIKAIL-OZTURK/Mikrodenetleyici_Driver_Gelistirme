@@ -65,12 +65,36 @@ için kullanılır.
 ---
 
 # API's                 
-## void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)          
-## void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)               
-## void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                 
-## GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)                
-## void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
-## void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
+
+### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)                                            
+GPIO port ve pinlerini kondigüre eder. 
+GPIO_TypeDef_t *GPIOx - Port bilgisi alır. (GPIOA...GPIOK gibi)
+GPIO_InitTypeDef_t *GPIO_ConfigStruct - Konfigürasyon sağlayan yapının adresini alır. Örneğin:              
+```c
+static void GPIO_LedConfig()
+{
+	GPIO_InitTypeDef_t GPIO_LedStruct = { 0 };  // Konfigürasyon sağlayan yapı 
+	RCC_GPIOD_CLK_ENABLE();		                  // Clock Enable for LED's 
+
+	// LED Configuration
+	GPIO_LedStruct.pinNumber = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+	GPIO_LedStruct.Mode = GPIO_MODE_OUTPUT;
+	GPIO_LedStruct.Speed = GPIO_SPEED_LOW;
+	GPIO_LedStruct.Otype = GPIO_OTYPE_PP;
+	GPIO_LedStruct.PuPd = GPIO_PUPD_NOPULL;
+  
+	GPIO_Init(GPIOD, &GPIO_LedStruct);
+ }
+```
+
+
+
+
+### void GPIO_Init(GPIO_TypeDef_t *GPIOx, GPIO_InitTypeDef_t *GPIO_ConfigStruct)               
+### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                 
+### GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)                
+### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                        
+### void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)                       
 
 
 
