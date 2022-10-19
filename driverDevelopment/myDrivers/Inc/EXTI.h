@@ -43,8 +43,8 @@
 typedef struct
 {
 	uint8_t EXTI_LineNumber;				/*!< EXTI line number for valid GPIO pin @def_group EXTI_Line_Values	*/
-	uint8_t TriggerSelection;				/*!< EXTI trigger selection values @def_group EXTI_Trigger_Modees		*/
 	uint8_t EXTI_Mode;						/*!< EXTI mode values @def_group EXTI_Modes								*/
+	uint8_t TriggerSelection;				/*!< EXTI trigger selection values @def_group EXTI_Trigger_Modees		*/
 	FunctionalState_t EXTI_LineCmd;			/*!< Mask of unmask the line number										*/
 
 }EXTI_InitTypeDef_t;

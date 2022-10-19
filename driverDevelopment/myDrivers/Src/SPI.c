@@ -48,6 +48,10 @@ static void SPI_TransmitHelper_16Bits(SPI_HandleTypeDef_t *SPI_Handle)
 	SPI_Handle->Instance->DR = *((uint16_t*)(SPI_Handle->pTxDataAddr));
 	SPI_Handle->pTxDataAddr += sizeof(uint16_t);
 	SPI_Handle->TxDataSize -= 2;
+	if(SPI_Handle->TxDataSize == 0)
+	{
+		SPI_CloseISR_TX(SPI_Handle);
+	}
 }
 
 
@@ -106,6 +110,11 @@ static void SPI_ReceiverHelper_8Bits(SPI_HandleTypeDef_t *SPI_Handle)
 	*((uint8_t*)(SPI_Handle->pRxDataAddr)) = *((__IO uint8_t*)(SPI_Handle->Instance->DR));
 	SPI_Handle->pRxDataAddr += sizeof(uint8_t);
 	SPI_Handle->RxDataSize--;
+
+	if(SPI_Handle->RxDataSize == 0)
+	{
+		SPI_CloseISR_RX(SPI_Handle);
+	}
 }
 
 

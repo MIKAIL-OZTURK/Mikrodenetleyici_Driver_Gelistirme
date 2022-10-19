@@ -581,13 +581,13 @@ Discarded input sections
  .text.SPI_CloseISR_RX
                 0x0000000000000000       0x36 ./myDrivers/Src/SPI.o
  .text.SPI_TransmitHelper_16Bits
-                0x0000000000000000       0x34 ./myDrivers/Src/SPI.o
+                0x0000000000000000       0x40 ./myDrivers/Src/SPI.o
  .text.SPI_TransmitHelper_8Bits
                 0x0000000000000000       0x40 ./myDrivers/Src/SPI.o
  .text.SPI_ReceiverHelper_16Bits
                 0x0000000000000000       0x42 ./myDrivers/Src/SPI.o
  .text.SPI_ReceiverHelper_8Bits
-                0x0000000000000000       0x3a ./myDrivers/Src/SPI.o
+                0x0000000000000000       0x46 ./myDrivers/Src/SPI.o
  .text.SPI_Init
                 0x0000000000000000       0x5a ./myDrivers/Src/SPI.o
  .text.SPI_TransmitData
@@ -604,7 +604,7 @@ Discarded input sections
                 0x0000000000000000       0x2a ./myDrivers/Src/SPI.o
  .text.SPI_InterruptHandler
                 0x0000000000000000       0x78 ./myDrivers/Src/SPI.o
- .debug_info    0x0000000000000000      0x612 ./myDrivers/Src/SPI.o
+ .debug_info    0x0000000000000000      0x616 ./myDrivers/Src/SPI.o
  .debug_abbrev  0x0000000000000000      0x1d8 ./myDrivers/Src/SPI.o
  .debug_aranges
                 0x0000000000000000       0x88 ./myDrivers/Src/SPI.o
@@ -641,10 +641,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x82 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x58 ./myDrivers/Src/SPI.o
  .debug_macro   0x0000000000000000       0x94 ./myDrivers/Src/SPI.o
- .debug_line    0x0000000000000000      0x8d9 ./myDrivers/Src/SPI.o
+ .debug_line    0x0000000000000000      0x8ec ./myDrivers/Src/SPI.o
  .debug_str     0x0000000000000000     0xa355 ./myDrivers/Src/SPI.o
  .comment       0x0000000000000000       0x51 ./myDrivers/Src/SPI.o
- .debug_frame   0x0000000000000000      0x22c ./myDrivers/Src/SPI.o
+ .debug_frame   0x0000000000000000      0x224 ./myDrivers/Src/SPI.o
  .ARM.attributes
                 0x0000000000000000       0x2e ./myDrivers/Src/SPI.o
  .group         0x0000000000000000        0xc ./myDrivers/Src/USART.o
