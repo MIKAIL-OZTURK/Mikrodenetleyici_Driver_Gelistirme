@@ -211,38 +211,64 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 // Veri göndermek için kullanılan fonksiyondur. 
 void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize)
 {
-	uint16_t *data16Bits = 0;
+	// Durumlar: 
+	// 1. 9 bit veri no parity
+	// 2. 8 bit veri no parity
+	// 3. 9 bit, yes parity ise 8 bit veri 1 bit parity
+	// 4. 8 bit, yer parity ise 7 bit veri 1 bit parity
+	uint16_t *data16Bits = 0; // Veri max 9 bit olacağından min 16 bit bir değişken oluşturuyoruz. 
+	// data16Bits 9 bitlik veri için oluşturulmuştur. 9 bitlik veri (uint8_t *pData)<- burada depolanamz.  
 
+	// 1. DURUM: 9 bit veri no parity -> 
 	if((USART_Handle->Init.WorldLenght == USART_WORDLENGHT_9Bits) && (USART_Handle->Init.Parity == USART_PARITY_NONE))
 	{
-		data16Bits = (uint16_t*)pData;
-
+		data16Bits = (uint16_t*)pData;	// 9 bitlik veri (uint8_t *pData)<- burada depolanamz.  
+		// o yüzden 9 bitlik işlemler içim gelen veri artık data16Bits değişkenininde işlenecek 
 	}
 	else
 	{
-		data16Bits = NULL;
+		data16Bits = NULL;	// Eğer veri 9 bit değilse NULL göster(rastgele yerleri göstermesin diye) çünkü biz 
+		// data16Bits değişkenini  sadece 9 bit veri için oluşturduk. Burada işi bitiyor. Diğer tüm işlemler 
+		// uint8_t *pData üzerinden çalışabilir. 
 	}
 
-	while( dataSize > 0 )
+	while( dataSize > 0 )	// Veri boyutu sııfr değilse veri gelmeye devam ediyordur. Mesaj gönderme işlemi -->
 	{
 		while( !(USART_GetFlagStatus(USART_Handle, USART_TxE_FLAG)) );
+		// USART_TxE_FLAG: Transmit data register empty. 1 ise veri yazılabilir, 0 ise veri yazılamaz. 
+		// USART_TxE_FLAG işlem sırasında 0'dır, veri yazılamaz.
+		// while(! (0)) = while(1) (İşlem bitene kadar bekle)
+		// İşlem bitince USART_TxE_FLAG 1 olur. Artık veri yazılabilir.
+		// while(! (1)) = while (0) döngü kırıldı. Diğer işlemler ----> 
 
-		/* 9Bits Data no Parity is for ELSE Condition, for others you will be in IF Case */
-		if(data16Bits == NULL)
+		if(data16Bits == NULL)	// data16Bits NULL ise artık bu değişken ile işim bitmiştir. Yani 9 bitlik bir 
+		// işlem yapmayacağım artık. Artık tüm veriler 8 veya 7 bit'tir. uint8_t *pData ile çalışılabilir. 
 		{
 			USART_Handle->Instance->DR = (uint8_t)(*pData & 0xFFU);
-			pData++;
-			dataSize--;
+			// (*pData & 0xFFU): Verim 8 bit olduğundan sağlama olması açısından yeniden 8 biti 1 olan sayı ile 
+			// & işelemine tabi tuttuk. Böylece pData max 8 bit olması sağlanmış olur. 
+			pData++;	// Verinin adresini arttırdık. 0x04'deki veri işlendiğinde sıra 0x08'deki veriye gelsin...
+			dataSize--; // Verinin boyutu azalttık. Veriler 1 bayt 1 bayt gönderilir. Her gönderimde benim verim 1 bayt
+			// azalır ve karşıya giden veriler 1 bayt 1 bayt artar. ( 8 bit 1 bayt ve değişkenimiz: uint8_t pData )
 		}
-		else
+		else // NULL değilse demek ki verim 9 bittir ve data16Btis 9 bitlik bir veriyi tutmaktadır. uint8_t *pData ile çalışılamaz.
 		{
 			USART_Handle->Instance->DR = (uint16_t)(*data16Bits & (0x01FFU));
-			data16Bits++;
-			dataSize -= 2;
+			// (*data16Bits & 0x01FFU): Verim 9 bit olduğundan 16 bit çok fazla ve gereksiz işlemler ile 
+			// program uzayabilir. O yüzden 9 biti 1 olan bir sayı ile data16Bits ile & işlemine tabi tutarsam
+			// data16Bits'lik değişkenim sanki 9 bitmiş gibi hareket edecektir. 
+			data16Bits++; // Verinin adresini arttırdık. 0x04'deki veri işlendiğinde sıra 0x08'deki veriye gelsin...
+			dataSize -= 2;// Verinin boyutu azalttık. Veriler 2 bayt 2 bayt gönderilir. Her gönderimde benim verim 2 bayt
+			// azalır ve karşıya giden veriler 2 bayt 2 bayt artar. 
 		}
 	}
 
 	while( !(USART_GetFlagStatus(USART_Handle, USART_TC_FLAG)) );
+	// USART_TC_FLAG: Transmission complete. 0 ise gönderim tamamlanmadı, 1 ise gönderim tamamlandı demek. 
+	// Gönderim tamamlanmadı ise USART_TC_FLAG = 0'dır.
+	// while(! (0)) = while(1) Bekle !
+	// Gönderim tamamlanınca USART_TC_FLAG = 1'dir.
+	// while(! (1)) = while(0) Döngüyü Kır, işlem tamam. 
 }
 
 
@@ -365,6 +391,7 @@ void USART_ReceiveData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer,
  *
  * @retval	void
  */
+// USART'ı aktif eden fonksiyondur
 void USART_PeriphCmd(USART_HandleTypedef_t *USART_Handle, FunctionalState_t stateOfUSART)
 {
 	if(stateOfUSART == ENABLE)
@@ -387,8 +414,10 @@ void USART_PeriphCmd(USART_HandleTypedef_t *USART_Handle, FunctionalState_t stat
  *
  * @retval	USART_FlagStatus_t
  */
+// Bayrak durum kontrolü yapmak için kullanılan fonksiyondur. 
 USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint16_t flagName)
 {
+	// SR registerinde benim gönderdiğim bayrağı kontrol et, veri var ise SET yok ise RESET'e çek 
 	return ((USART_Handle->Instance->SR & flagName) ? USART_FLAG_SET : USART_FLAG_RESET);
 }
 
