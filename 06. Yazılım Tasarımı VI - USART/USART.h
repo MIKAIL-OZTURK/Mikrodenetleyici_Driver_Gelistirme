@@ -98,9 +98,10 @@ typedef struct __USART_HandleTypedef_t
 // Konfigürasyon için kullanılan fonksiyondur.
 void USART_Init(USART_HandleTypedef_t *USART_Handle);
 
+// Veri göndermek için kullanılan fonksiyondur. 
 void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
 
-
+// Veri almak için kullanılan fonksiyondur 
 void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
 
 void USART_TransmitData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
