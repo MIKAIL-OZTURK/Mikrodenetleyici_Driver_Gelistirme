@@ -82,9 +82,9 @@ typedef struct
 // Konfigürasyon Ayarları: USART.h -> USART_InitTypedef_t yapısı, Registers: STM3244xx.h -> USART_TypeDef_t yapısı
 typedef struct __USART_HandleTypedef_t
 {
-	USART_TypeDef_t *Instance;			// Hangi USART üzerinde işlem yapacağız. (USART1, USART4 vs)
-	USART_InitTypedef_t Init;			// USART_InitTypedef_t yapısındaki parametrelere ulaşır. (Init.Mode gibi)
-	uint8_t *pTxBuffer;
+	USART_TypeDef_t *Instance;		// Register'lara erişebikmek için kullanılır. (Instance->CR1 gibi)
+	USART_InitTypedef_t Init;		// Konfigürasyon Parametrelerine erişebilmek için kullanılır. (Init.Mode gibi)
+	uint8_t *pTxBuffer;			// 
 	uint16_t TxBufferSize;
 	uint8_t TxStatus;
 	void (*TxISR_Function)(struct __USART_HandleTypedef_t *USART_Handle);
@@ -95,14 +95,22 @@ typedef struct __USART_HandleTypedef_t
 
 }USART_HandleTypedef_t;
 
+// Konfigürasyon için kullanılan fonksiyondur.
 void USART_Init(USART_HandleTypedef_t *USART_Handle);
-void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
-void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
-void USART_TransmitData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
-void USART_ReceiveData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
-void USART_PeriphCmd(USART_HandleTypedef_t *USART_Handle, FunctionalState_t stateOfUSART);
-USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint16_t flagName);
-void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle);
 
+void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
+
+
+void USART_ReceiveData(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
+
+void USART_TransmitData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize);
+
+void USART_ReceiveData_IT(USART_HandleTypedef_t *USART_Handle, uint8_t *pBuffer, uint16_t dataSize);
+
+void USART_PeriphCmd(USART_HandleTypedef_t *USART_Handle, FunctionalState_t stateOfUSART);
+
+USART_FlagStatus_t USART_GetFlagStatus(USART_HandleTypedef_t *USART_Handle, uint16_t flagName);
+
+void USART_InterruptHandler(USART_HandleTypedef_t *USART_Handle);
 
 #endif /* INC_USART_H_ */
