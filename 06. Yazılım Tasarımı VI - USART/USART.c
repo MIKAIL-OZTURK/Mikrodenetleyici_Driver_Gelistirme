@@ -208,6 +208,7 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
  *
  * @retval	void
  */
+// Veri göndermek için kullanılan fonksiyondur. 
 void USART_TransmitData(USART_HandleTypedef_t *USART_Handle, uint8_t *pData, uint16_t dataSize)
 {
 	uint16_t *data16Bits = 0;
