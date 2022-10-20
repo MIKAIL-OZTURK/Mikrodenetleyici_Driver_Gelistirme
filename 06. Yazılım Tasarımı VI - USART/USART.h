@@ -9,8 +9,8 @@
 #define USART_MODE_Tx_Rx				( (uint32_t)(0x0000000C) )
 
 /* @def_group WordLenght_Types */
-#define USART_WORDLENGHT_8Bits			( (uint32_t)(0x00000000) )
-#define USART_WORDLENGHT_9Bits			( (uint32_t)(0x00001000) )
+#define USART_WORDLENGHT_8Bits				( (uint32_t)(0x00000000) )
+#define USART_WORDLENGHT_9Bits				( (uint32_t)(0x00001000) )
 
 /* @def_group Parity_Modes */
 #define USART_PARITY_NONE				( (uint32_t)(0x00000000) )
@@ -21,7 +21,7 @@
 #define USART_STOPBITS_1				( (uint32_t)(0x00000000) )
 #define USART_STOPBITS_Half				( (uint32_t)(0x00001000) )
 #define USART_STOPBITS_2				( (uint32_t)(0x00002000) )
-#define USART_STOPBITS_1_Half			( (uint32_t)(0x00003000) )
+#define USART_STOPBITS_1_Half				( (uint32_t)(0x00003000) )
 
 /* @def_group OverSampling_Modes */
 #define USART_OVERSAMPLE_16				( (uint32_t)(0x00000000) )
@@ -56,12 +56,12 @@ typedef enum
 typedef struct
 {
 	uint32_t Mode;						/*!< Transmission and Reception Modes @def_group MODE_Types 		*/
-	uint32_t BaudRate;					/*!< User Value for UART Baudrate							 		*/
-	uint32_t WorldLenght;				/*!< 8 Bits & 9 Bits  Modes @def_group WordLenght_Types 			*/
-	uint32_t Parity;					/*!< Even & Odd Parity Modes @def_group Parity_Modes 				*/
-	uint32_t StopBits;					/*!< Stop Bits Modes @def_group Stop_Bits 							*/
-	uint32_t OverSampling;				/*!< OverSampling Modes @def_group OverSampling_Modes 				*/
-	uint32_t HardWareFlowControl;		/*!< HardWareFlowControl Modes @def_group HardWareFlowControl_Modes */
+	uint32_t BaudRate;					/*!< User Value for UART Baudrate			 		*/
+	uint32_t WorldLenght;					/*!< 8 Bits & 9 Bits  Modes @def_group WordLenght_Types 		*/
+	uint32_t Parity;					/*!< Even & Odd Parity Modes @def_group Parity_Modes 			*/
+	uint32_t StopBits;					/*!< Stop Bits Modes @def_group Stop_Bits 				*/
+	uint32_t OverSampling;					/*!< OverSampling Modes @def_group OverSampling_Modes 			*/
+	uint32_t HardWareFlowControl;				/*!< HardWareFlowControl Modes @def_group HardWareFlowControl_Modes 	*/
 
 }USART_InitTypedef_t;
 
