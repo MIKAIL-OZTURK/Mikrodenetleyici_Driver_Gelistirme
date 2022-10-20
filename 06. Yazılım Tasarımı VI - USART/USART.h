@@ -79,7 +79,7 @@ typedef struct
 
 // Hem konfigürasyon ayarlarının bulunduğu yapıya(USART_InitTypedef_t) hemde registerlere(USART_TypeDef_t) erişebilmek 
 // için oluştulmuş yapıdır. 
-
+// Konfigürasyon Ayarları: USART.h -> USART_InitTypedef_t yapısı, Registers: STM3244xx.h -> USART_TypeDef_t yapısı
 typedef struct __USART_HandleTypedef_t
 {
 	USART_TypeDef_t *Instance;			// Hangi USART üzerinde işlem yapacağız. (USART1, USART4 vs)
