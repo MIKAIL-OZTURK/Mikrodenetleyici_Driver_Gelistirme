@@ -8,3 +8,22 @@ hattı aktif edilmek zorundadır, yoksa kullanım mümkün değildir. Clock hatl
 ## RCC.c 
 
 ## RCC Registers 
+
+RCC Clock Configuration Register (RCC_CFGR):
+
+1. SW(System clock switch): Sistem clock seçimi yapmak için kullanılır. (HSI, HSE, PLL)
+2. SWS(System clock switch status): Sistemde hangi clock'un kullanıldığını gösterir. 
+3. 
+4- 7. HPRE(AHB Prescaler): Clock bölünme oranlarının bulunduğu registerdir. (DIV4, DIV8...)
+
+
+
+
+
+
+
+
+
+
+
+

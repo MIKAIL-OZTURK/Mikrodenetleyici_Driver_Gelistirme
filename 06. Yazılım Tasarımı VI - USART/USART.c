@@ -169,10 +169,11 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 	
 	/***** Baud Rate Configuration *****/
 	if(USART_Handle->Instance == USART1 || USART_Handle->Instance == USART6)
-	{
+	// USART1 ve USART6 APB2 clock hattına bağlıdır. O yüzden farklı bir clock ile baud rate değerleri hesap
+	{	//APB2 Clock hattı için clock ayarları --> USART1 ve USART6
 		periphClock = RCC_GetPClock2();
 	}
-	else
+	else // APB1 Clock hattı için clock ayarları --> Diğer USART birimleri (USART2, UART5..)
 	{
 		periphClock = RCC_GetPClock1();
 	}
