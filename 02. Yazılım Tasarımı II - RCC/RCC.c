@@ -1,5 +1,23 @@
 #include "RCC.h"
 
+// CLOCK | MCU -> PERIPHERALS 
+// 1. System Clock
+// 2. AHB Clock 
+// 3. APB1 Clcok 
+// 3. APB2 Clock 
+//										 |----> APB1 Clock ----> PERIPHERALS ( TIM2..TIM5,USART2...USART3, SPI2...)
+//										 |
+//	MCU ->	System Clock -> AHB Clock 	<
+//										 |
+//										 |----> APB2 Clock ----> PERIPHERALS ( TIM1,TIM9...TIM10, USART1, USART6...)
+//
+// Functions ->
+// RCC_GetSystemClock()	: Find System Clock 
+// RCC_GetHClock()		: Find AHB Clock
+// RCC_GetPClock1()		: Find APB1 Clock
+// RCC_GetPClock2()		: Find APB2 Clock 
+
+
 const uint8_t AHB_Prescalers[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};	// Bölünme oranları (DIV2, DIV4 gibi)
 // 
 const uint8_t APB_Prescalers[] = {0, 0, 0, 0, 1, 2, 3, 4};
@@ -64,7 +82,6 @@ uint32_t RCC_GetHClock(void)
 	AHB_Prescalers[11] = 4 	(tempValue = 4)
 	AHB_PeriphClock = 16
 	*/
-
 	return AHB_PeriphClock;
 }
 
@@ -75,6 +92,7 @@ uint32_t RCC_GetHClock(void)
  *
  * @retval	uint32_t
  */
+// APB1 veri yoluan bağlı çevresel birimler için clock hesabı --> 
 uint32_t RCC_GetPClock1(void)
 {
 	uint32_t APB1_PeriphClock = 0;
@@ -97,6 +115,7 @@ uint32_t RCC_GetPClock1(void)
  *
  * @retval	uint32_t
  */
+// APB2 veri yoluan bağlı çevresel birimler için clock hesabı --> 
 uint32_t RCC_GetPClock2(void)
 {
 	uint32_t APB2_PeriphClock = 0;
