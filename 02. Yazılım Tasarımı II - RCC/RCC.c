@@ -5,21 +5,30 @@
 // 2. AHB Clock 
 // 3. APB1 Clcok 
 // 3. APB2 Clock 
-//										 |----> APB1 Clock ----> PERIPHERALS ( TIM2..TIM5,USART2...USART3, SPI2...)
-//										 |
-//	MCU ->	System Clock -> AHB Clock 	<
-//										 |
-//										 |----> APB2 Clock ----> PERIPHERALS ( TIM1,TIM9...TIM10, USART1, USART6...)
+// 
+//							| ---> PERIPHERALS (GPIOA...GPIOI)
+//							|
+//				| ---> AHB1 < ---> APB1 ---> PERIPHERALS (TIM2...TIM5, UART4, USART3, DAC1, DAC2)
+//				|			|
+//				|			| ---> ABP2 ---> PERIPHERALS (TIM9...TIM11, USART1, ADC1...ADC3)
+// MCU ---> AHB < ---> AHB2 ---> PERIPHERALS (RNG, CAMERA, USB OTG)
+//				|
+//				|
+//				| ---> AHB3 ---> PERIPHERALS (External Memory Controller (FSMC))
+//
+//
+// 										| ---> APB1	---> |	
+//  USART CLOCK İÇİN:			USARTx <				 < ---> AHB1 ---> AHB(System Clock) ---> MCU
+//										| ---> ABP2 ---> |
 //
 // Functions ->
-// RCC_GetSystemClock()	: Find System Clock 
-// RCC_GetHClock()		: Find AHB Clock
+// RCC_GetSystemClock()	: Find System Clock (AHB Clock)
+// RCC_GetHClock()		: Find AHB1 Clock
 // RCC_GetPClock1()		: Find APB1 Clock
 // RCC_GetPClock2()		: Find APB2 Clock 
 
 
 const uint8_t AHB_Prescalers[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};	// Bölünme oranları (DIV2, DIV4 gibi)
-// 
 const uint8_t APB_Prescalers[] = {0, 0, 0, 0, 1, 2, 3, 4};
 
 
@@ -29,7 +38,7 @@ const uint8_t APB_Prescalers[] = {0, 0, 0, 0, 1, 2, 3, 4};
  *
  * @retval	uint32_t
  */
-// Sistem Clock'unu bulan fonksiyon ->
+										/****************** AHB CLOCK ******************/
 uint32_t RCC_GetSystemClock(void)
 {
 	uint32_t SystemCoreClock = 0;	// Sistem clock değerini tutacak değişken
@@ -58,7 +67,7 @@ uint32_t RCC_GetSystemClock(void)
  *
  * @retval	uint32_t
  */
-// Çevresel birimlere aktarılacak clock'u hesaplayan fonksiyon 
+										/****************** AHB1 CLOCK ******************/
 uint32_t RCC_GetHClock(void)
 {
 	uint32_t AHB_PeriphClock = 0;	// AHB Clock 
@@ -66,10 +75,9 @@ uint32_t RCC_GetHClock(void)
 	uint8_t HPRE_Value = 0;
 	uint8_t tempValue = 0;
 
-	SystemCoreClock = RCC_GetSystemClock();		// System Clock bulundu. 
-
-	HPRE_Value = ((RCC->CFGR >> 4U) & 0xFU);	// Kaça bölünmesi gerektiğini tutan değişken 
-	tempValue = AHB_Prescalers[HPRE_Value];		// Bölünme oranı
+	SystemCoreClock = RCC_GetSystemClock();				// AHB(System Clock) bulundu 
+	HPRE_Value = ((RCC->CFGR >> 4U) & 0xFU);			// Kaça bölünmesi gerektiğini tutan değişken 
+	tempValue = AHB_Prescalers[HPRE_Value];				// Bölünme oranı
 	AHB_PeriphClock = (SystemCoreClock >> tempValue);	// 
 
 	/*
@@ -92,7 +100,7 @@ uint32_t RCC_GetHClock(void)
  *
  * @retval	uint32_t
  */
-// APB1 veri yoluan bağlı çevresel birimler için clock hesabı --> 
+										/****************** APB1 CLOCK ******************/
 uint32_t RCC_GetPClock1(void)
 {
 	uint32_t APB1_PeriphClock = 0;
@@ -100,9 +108,9 @@ uint32_t RCC_GetPClock1(void)
 	uint8_t HPRE1_Value = 0;
 	uint8_t tempValue = 0;
 
-	Hclock = RCC_GetHClock();
-	HPRE1_Value = ((RCC->CFGR >> 10U) & 0x7U);
-	tempValue = APB_Prescalers[HPRE1_Value];
+	Hclock = RCC_GetHClock();						// AHB1 Clock (APB1, AHB1 veri yoluna bağlıdır.Önce AHB1 bulunur, ardından APB1 bulunur.)
+	HPRE1_Value = ((RCC->CFGR >> 10U) & 0x7U);		// Kaça bölünmesi gerektiğini tutan değişken 
+	tempValue = APB_Prescalers[HPRE1_Value];		// Bölünme oranı
 	APB1_PeriphClock = (Hclock >> tempValue);
 
 	return APB1_PeriphClock;
@@ -115,7 +123,7 @@ uint32_t RCC_GetPClock1(void)
  *
  * @retval	uint32_t
  */
-// APB2 veri yoluan bağlı çevresel birimler için clock hesabı --> 
+										/****************** APB2 CLOCK ******************/
 uint32_t RCC_GetPClock2(void)
 {
 	uint32_t APB2_PeriphClock = 0;
@@ -123,9 +131,9 @@ uint32_t RCC_GetPClock2(void)
 	uint8_t HPRE2_Value = 0;
 	uint8_t tempValue = 0;
 
-	Hclock = RCC_GetHClock();
-	HPRE2_Value = ((RCC->CFGR >> 13U) & 0x7U);
-	tempValue = APB_Prescalers[HPRE2_Value];
+	Hclock = RCC_GetHClock();					// AHB1 Clock (APB1, AHB1 veri yoluna bağlıdır.Önce AHB1 bulunur, ardından APB1 bulunur.)
+	HPRE2_Value = ((RCC->CFGR >> 13U) & 0x7U);	// Kaça bölünmesi gerektiğini tutan değişken 
+	tempValue = APB_Prescalers[HPRE2_Value];	// Bölünme oranı
 	APB2_PeriphClock = (Hclock >> tempValue);
 
 	return APB2_PeriphClock;

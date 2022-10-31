@@ -177,15 +177,40 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 	{
 		periphClock = RCC_GetPClock1();
 	}
+//
+// Baud Rate Formülü -> (Kaynak: Reference Manual -> Page 978: Fractional baud rate generation)
+//
+//								Peripheral Clock
+//		USARTDIV = -----------------------------------------
+//					8 x (2 - OVERSAMPLINGx) x (Tx/Rx Baud)
+//
+// OVERSAMPLING8 = 1
+// OVERSAMPLING16 = 0
+// USARTDIV = Donanımın istenilen baud rate için ayarlanması sağlayan değer 
+// Tx/Rx Baud = Baud Rate
+// Peripheral Clock = USART donanımının çalışma frekansı yani APB1~APB2 üzererinden gelen clock frekansı
+/*
+	ÖRNEK - 1 : Baud Rate Hızımızı 9600'e ayarlayalım ve OVERSAMPLING16 olsun(default). Peripheral Clock 8MHz olsun. -->
+
+					8.000.000
+	USARTDIV = ------------------- = 52.083333
+				8 x (2-0) x 9600
+
+	Bulduğumuz bu değeri USART_BRR registerine yazmak için mantissa ve fraction şeklinde ikiye ayırmamız gerekmekte. ->
+	Mantissa = 52
+	Fractions = 16 x 0.083333 ~= 1
+
+	En son bu değerleri USART_BRR registerine yazıyoruz
+*/
 
 	if(USART_Handle->Init.OverSampling == USART_OVERSAMPLE_8)
-	{
-		USART_DIV_Value = __USART_DIV_VALUE_8(periphClock, USART_Handle->Init.BaudRate);
-		mantissaPart = (USART_DIV_Value / 100U);
-		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);
+	{																							// ÖRNEK - 1'e göre yorumlarsak:
+		USART_DIV_Value = __USART_DIV_VALUE_8(periphClock, USART_Handle->Init.BaudRate);		// USARTDIV değerini bulduk 	(USARTDIV = 52.083333)
+		mantissaPart = (USART_DIV_Value / 100U);												// mantissa = (USARTDIV / 100) => (52.083333 / 100) = 52
+		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);								// fraction = (52.083) - ((52/100) * 100) = (52.083333 - 52) = 0.083333
 		fractionPart = (((fractionPart * 8U) + 50U) / 100U) & (0x07U);
 	}
-	else
+	else /* USART_Handle->Init.OverSampling == USART_OVERSAMPLE_16 */
 	{
 		USART_DIV_Value = __USART_DIV_VALUE_16(periphClock, USART_Handle->Init.BaudRate);
 		mantissaPart = (USART_DIV_Value / 100U);
@@ -193,8 +218,9 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 		fractionPart = (((fractionPart * 16U) + 50U) / 100U) & (0x0FU);
 	}
 
-	tempValue |= (mantissaPart << 4U);
-	tempValue |= (fractionPart << 0U);
+	/* BRR(Baud Rate Register) - Baud rate hızı için mantissa ve fraction değerlerinin yazılması gerekn registerdir. 		 */
+	tempValue |= (mantissaPart << 4U);			// 9600 BaudRate için mantissa değerini registere(USART_BRR) yazıyoruz (mantissa = 52)
+	tempValue |= (fractionPart << 0U);			// 9600 BaudRate için fraction değerini registere(USART_BRR) yazıyoruz (fraction = 0.083333)
 	USART_Handle->Instance->BRR = tempValue;
 }
 
