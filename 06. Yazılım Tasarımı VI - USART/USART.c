@@ -169,7 +169,7 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 	
 	/***** Baud Rate Configuration *****/
 	if(USART_Handle->Instance == USART1 || USART_Handle->Instance == USART6)
-	// USART1 ve USART6 APB2 clock hattına bağlıdır. O yüzden farklı bir clock ile baud rate değerleri hesap
+	// USART1 ve USART6 APB2 clock hattına bağlıdır. O yüzden farklı bir clock ile baud rate değerleri hesaplanır
 	{	//APB2 Clock hattı için clock ayarları --> USART1 ve USART6
 		periphClock = RCC_GetPClock2();
 	}
@@ -180,9 +180,9 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 //
 // Baud Rate Formülü -> (Kaynak: Reference Manual -> Page 978: Fractional baud rate generation)
 //
-//								Peripheral Clock
-//		USARTDIV = -----------------------------------------
-//					8 x (2 - OVERSAMPLINGx) x (Tx/Rx Baud)
+//					Peripheral Clock
+//		USARTDIV = ------------------------------------------------
+//				8 x (2 - OVERSAMPLINGx) x (Tx/Rx Baud)
 //
 // OVERSAMPLING8 = 1
 // OVERSAMPLING16 = 0
@@ -192,9 +192,9 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 /*
 	ÖRNEK - 1 : Baud Rate Hızımızı 9600'e ayarlayalım ve OVERSAMPLING16 olsun(default). Peripheral Clock 8MHz olsun. -->
 
-					8.000.000
-	USARTDIV = ------------------- = 52.083333
-				8 x (2-0) x 9600
+			  8.000.000
+	USARTDIV = ------------------------- = 52.083333
+			8 x (2-0) x 9600
 
 	Bulduğumuz bu değeri USART_BRR registerine yazmak için mantissa ve fraction şeklinde ikiye ayırmamız gerekmekte. ->
 	Mantissa = 52
@@ -205,9 +205,9 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 
 	if(USART_Handle->Init.OverSampling == USART_OVERSAMPLE_8)
 	{																							// ÖRNEK - 1'e göre yorumlarsak:
-		USART_DIV_Value = __USART_DIV_VALUE_8(periphClock, USART_Handle->Init.BaudRate);		// USARTDIV değerini bulduk 	(USARTDIV = 52.083333)
-		mantissaPart = (USART_DIV_Value / 100U);												// mantissa = (USARTDIV / 100) => (52.083333 / 100) = 52
-		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);								// fraction = (52.083) - ((52/100) * 100) = (52.083333 - 52) = 0.083333
+		USART_DIV_Value = __USART_DIV_VALUE_8(periphClock, USART_Handle->Init.BaudRate);	// USARTDIV değerini bulduk 	(USARTDIV = 52.083333)
+		mantissaPart = (USART_DIV_Value / 100U);						// mantissa = (USARTDIV / 100) => (52.083333 / 100) = 52
+		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);				// fraction = (52.083) - ((52/100) * 100) = (52.083333 - 52) = 0.083333
 		fractionPart = (((fractionPart * 8U) + 50U) / 100U) & (0x07U);
 	}
 	else /* USART_Handle->Init.OverSampling == USART_OVERSAMPLE_16 */
