@@ -204,10 +204,10 @@ void USART_Init(USART_HandleTypedef_t *USART_Handle)
 */
 
 	if(USART_Handle->Init.OverSampling == USART_OVERSAMPLE_8)
-	{																							// ÖRNEK - 1'e göre yorumlarsak:
+	{												// ÖRNEK - 1'e göre yorumlarsak:
 		USART_DIV_Value = __USART_DIV_VALUE_8(periphClock, USART_Handle->Init.BaudRate);	// USARTDIV değerini bulduk 	(USARTDIV = 52.083333)
 		mantissaPart = (USART_DIV_Value / 100U);						// mantissa = (USARTDIV / 100) => (52.083333 / 100) = 52
-		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);				// fraction = (52.083) - ((52/100) * 100) = (52.083333 - 52) = 0.083333
+		fractionPart = (USART_DIV_Value) - (mantissaPart * 100U);		// fraction = (52.083) - ((52.083/100) * 100) = (52.083333 - 52) = 0.083333
 		fractionPart = (((fractionPart * 8U) + 50U) / 100U) & (0x07U);
 	}
 	else /* USART_Handle->Init.OverSampling == USART_OVERSAMPLE_16 */
