@@ -1,23 +1,40 @@
 # GPIO (General Purpose Input Output)
 
-## GPIO Registers 
-**1. GPIOx_MODER**
-GPIO port mode register - Bir pinin modunu belirlemek için kullanılır.         
-Modlar: Giriş modu(Input) - Genel amaçlı çıkış modu(General purpose output mode) - Anternatif Fonksiyon modu(Anternate 
-function mode) - Analog mod(Analog mode)    
+## GPIO Registers                   
+**1. GPIOx_MODER**                        
+GPIO port mode register - Bir pinin modunu belirlemek için kullanılır.                
+
+Modlar: 
+
+- Giriş modu(Input)
+-  Genel amaçlı çıkış modu(General purpose output mode)
+-  Anternatif Fonksiyon modu(Anternate function mode)
+-  Analog mod(Analog mode)    
 
 **2. GPIOx_OTYPER**
-GPIO port output type register - Bir pinin çıkış türünü yapılandırmak için kullanılır.              
-Çıkış Türleri: Output push-pull - Output open-drain           
+GPIO port output type register - Bir pinin çıkış türünü yapılandırmak için kullanılır. 
+
+Çıkış Türleri: 
+- Output: push-pull
+- Output: open-drain           
 
 **3. GPIOx_OSPPEDR**               
 GPIO port output speed register - Lojik 1'den lojik 0'a çıkma veya lojik 0'dan lojik 1'e geçme hızını(~süresini) ayarlar. 
-Çıkış Hızları: Low - Medium - High -  Very high speeds
+
+Çıkış Hızları: 
+- Low
+- Medium
+- High
+- Very high speeds
 
 **4. GPIOx_PUPDR**              
 GPIO port pull-up/pull-down register - Çıkış türü _Output push-pull_ olarak yapılandırılan bir pini pull-up veya pull-down 
 olarak ayarlar.
-Modlar: No pull-up, pull-down - Pull up - Pull Down 
+
+Modlar: 
+- No pull up
+- Pull down 
+- Pull up - Pull Down 
 
 **5. GPIOx_IDR**            
 GPIO port input data register - Bu register ile ilgili porttan veri okuyoruz. (Read Only)                              
@@ -221,9 +238,12 @@ GPIO_PinState_t GPIO_ReadPin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber)
 
 ### void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)                                  
 Bir pinin değerini SET veya RESET yapar. 
-***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                            
-***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                              
-***GPIO_PinState_t pinState*** - Pin durum bilgisi alır. (GPIO_PIN_SET veya GPIO_PIN_RESET)                                       
+
+- ***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)  
+
+- ***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)   
+
+- ***GPIO_PinState_t pinState*** - Pin durum bilgisi alır. (GPIO_PIN_SET veya GPIO_PIN_RESET)                                       
 
 ```c
 void GPIO_WritePin(GPIO_TypeDef_t *GPIOx, uint16_t pinNumber, GPIO_PinState_t pinState)
