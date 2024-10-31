@@ -299,8 +299,11 @@ void GPIO_TogglePin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
 
 ### void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)    
 Bir pini konfigürasyona kapatır ve kilitler. 
-***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)                                        
-***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)                        
+
+***GPIO_TypeDef_t *GPIOx*** - Port bilgisi alır. (GPIOA...GPIOK gibi)     
+
+***uint16_t pinNumber*** - Pin bilgisi alır. (GPIO_PIN_7 gibi)     
+
 ```c
 void GPIO_LockPin(GPIO_TypeDef_t* GPIOx, uint16_t pinNumber)
 {
